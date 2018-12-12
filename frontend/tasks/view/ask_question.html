@@ -1,0 +1,23 @@
+<div class="askAquestion" id="ask_question" role="dialog">
+  <div class="modal-body">
+    <ng-form class="form-horizontal" name="sendMessage" method="post" accept-charset="utf-8" novalidate ng-submit="askQuestion(selectedData.selectedData.task.id,selectedData.selectedData.user_info[0].user_id,selectedData.selectedData.task.user_id,message)">
+      <!-- <div class="user_info">
+        <a href="#"><img fallback-src src="{{userData.photo}}"></a>
+        <span><a href="#">{{userData.name}}</a></span>
+      </div> -->
+      <div class="chat_submit_btn">
+        <h2>Ask {{selectedData.selectedData.task.name}} a question about this Task.</h2>
+        <textarea ng-focus="true" autofocus  class="form-control" required rows="5" ng-model="message" name="chat_text" placeholder="What is your question?" onkeydown="if(event.keyCode == 13){this.form.submit();return false; }"
+          required=""></textarea>
+
+            <input type="hidden" name="task_id" id="ques_task_id" value="{{selectedData.selectedData.task.id}}" ng-model="selectedData.selectedData.task.id">
+            <input type="hidden" name="from" value="{{selectedData.selectedData.user_info[0].user_id}}" ng-model="selectedData.selectedData.user_info[0].user_id">
+            <input type="hidden" name="task_by" id="ques_user_id" value="{{selectedData.selectedData.task.user_id}}" ng-model="selectedData.selectedData.task.user_id">
+            <input type="hidden" name="reply_to" value="0">
+            <input type="hidden" name="to_id" value="{{selectedData.selectedData.task.user_id}}"  id="ques_user_to_id" ng-model="selectedData.selectedData.task.user_id"> 
+          <md-button focus-if ng-enter="askQuestion(selectedData.selectedData.task.id,selectedData.selectedData.user_info[0].user_id,selectedData.selectedData.task.user_id,message)" ng-click="askQuestion(selectedData.selectedData.task.id,selectedData.selectedData.user_info[0].user_id,selectedData.selectedData.task.user_id,message)" id="chat_submit" class="md-raised md-primary pull-right" ng-disabled="!message">Send</md-button>
+          <!-- <md-button id="back_btn" ng-click="cancel()" class="md-raised pull-right"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</md-button> -->
+      </div>
+    </ng-form>
+  </div>
+</div>

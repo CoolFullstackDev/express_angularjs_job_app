@@ -1,0 +1,60 @@
+{
+  "name": "taskoli",
+  "description": "A project for odd job freelancers",
+  "main": "server.js",
+  "authors": [
+    "We Devz"
+  ],
+  "license": "ISC",
+  "homepage": "http://www.taskoli.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.4",
+    "angular-ui-router": "0.3.2",
+    "angular-recaptcha": "4.0.4",
+    "ngmap": "1.18.4",
+    "angular-socialshare": "angularjs-socialshare#2.3.7",
+    "lodash": "4.17.4",
+    "angular-bootstrap": "latest",
+    "ui-bootstrap": "2.5.0",
+    "angularjs-slider": "6.1.1",
+    "angular-toastr": "2.1.1",
+    "ngInfiniteScroll": "1.3.4",
+    "angular-loading-bar": "0.9.0",
+    "angular-moment": "1.0.1",
+    "angular-google-places-autocomplete": "0.2.7",
+    "ng-file-upload": "12.2.13",
+    "angular-material": "1.1.4",
+    "ng-material-datetimepicker": "1.6.1",
+    "angular-animate": "1.6.4",
+    "components-font-awesome": "4.7.0",
+    "ngGeolocation": "0.0.8",
+    "socket.io-client": "2.0.3",
+    "angular-socket-io": "0.7.0",
+    "glyphicons-only-bootstrap": "^0.0.1",
+    "ngAnimate": "*",
+    "angular-scroll": "^1.0.2",
+    "angular-typer": "^0.5.6",
+    "material-steppers": "^2.0.0",
+    "angular-browser-push-notifications": "^0.1.1"
+  },
+  "resolutions": {
+    "angular": "1.6.4"
+  },
+  "overrides": {
+    "socket.io-client": {
+      "main": "dist/socket.io.js"
+    },
+    "glyphicons-only-bootstrap": {
+      "main": [
+        "css/bootstrap.min.css"
+      ]
+    }
+  }
+}

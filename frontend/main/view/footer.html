@@ -1,0 +1,81 @@
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                    <h6>Account</h6>
+                <ul class="footer-links">
+                    <li ng-if="!userData">
+                        <a href="#" class="signup_popup" ng-click="openReg()">Sign Up</a>
+                    </li>
+                    <li ng-if="!userData">
+                        <a href="#" class="login_popup" ng-click="openLogin()">Login</a>
+                    </li>
+                    <li ng-if="userData">
+                       <a href="#" ui-sref="my-profile({name: userData.id})">View Profile</a>
+                    </li>
+                    <li ng-if="userData">
+                        <a href="#" ui-sref="edit-profile({name: userData.id})">Edit Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>About</h6>
+                <ul class="footer-links">
+                    <li>
+                        <a ui-sref="page.about">About Us</a>
+                    </li>
+                    <li>
+                        <a ui-sref="page.contactus">Contact</a>
+                    </li>
+                    <li>
+                        <a ui-sref="page.how-it-works">How it works</a>
+                    </li>
+                    <li>
+                        <a ui-sref="page.faq">FAQs</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Support</h6>
+                <ul class="footer-links">
+                    <!-- <li>
+                        <a ui-sref="page.rules">Marketplace Rules</a>
+                    </li> -->
+                    <li>
+                        <a ui-sref="page.terms">Terms and Conditions</a>
+                    </li>
+                    <li>
+                        <a ui-sref="page.policy">Privacy Policy</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6>Stay connected!</h6>
+                <ul class="social-links list-inline">
+                    <li>
+                        <a href="https://www.facebook.com/Taskoly-1656040688005545/" target="_blank">
+                            <i class="fa fa-facebook-official"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/Taskoli?lang=en" target="_blank">
+                            <i class="fa fa-twitter-square"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://plus.google.com/104238048138791457671/posts?hl=en-GB" target="_blank">
+                            <i class="fa fa-google-plus-square"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-md-12">
+                    Copyright© 2018 Taskoli
+                </div>
+            </div>
+    </div>
+    </div>
+</section>

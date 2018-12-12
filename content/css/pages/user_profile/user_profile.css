@@ -1,0 +1,350 @@
+#user_profile form {
+    padding: 15px 0px;
+    margin-bottom: 0;
+    display: inline-block;
+    width: 100%;
+    min-height: 400px;
+}
+
+#user_profile.user_profile .user_info,
+#gallery_tasks .user_info{
+    width: 20%;
+    float: left;
+    text-align: center;
+}
+
+#user_profile .user_info {
+    text-align: center;
+}
+
+#user_profile .user_info>a {
+    width: 65%;
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#user_profile .user_info img {
+    width: 100%;
+}
+
+#user_profile .user_info span i {
+    margin: 0 5px;
+    font-size: 20px;
+}
+
+#user_profile .payment_methods,
+#user_profile .peace_of_mind {
+    margin-top: 10px;
+}
+
+#user_profile .user_info h6 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+#user_profile.user_profile .user_detail {
+    text-align: initial;
+    width: 80%;
+    position: relative;
+    float: left;
+}
+
+#user_profile .user_detail {
+    text-align: initial;
+    position: relative;
+}
+
+#user_profile .user_detail small div{
+    font-size: 13px;
+    display: inline-block;
+}
+#user_profile .user_detail small{
+    font-size: 13px;
+    display: inline-block;
+}
+
+#task_quiz_api,
+#task_quiz_api li {
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+
+#user_profile #task_quiz_api {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px
+}
+
+#user_profile #task_quiz_api li {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+#user_profile #task_rating_api i {
+    margin: 0 2px;
+}
+
+#user_profile #task_quiz_api li hr {
+    width: 100%;
+    float: left;
+    margin: 5px 0px;
+}
+
+#user_profile .name_timestamp {
+    width: 80%;
+}
+#user_profile .name_timestamp #task_rating_api{
+    margin-right: 5px;
+}
+#user_profile .name_timestamp #task_rating_api i{
+     margin: 0
+}
+#user_profile #task_quiz_api .question {
+    width: 100%;
+    float: left;
+}
+.skill_data{
+    margin-bottom: 10px;
+}
+.skill_data h6{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.skill_data ul{
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+.skill_data ul li{
+    color: #a0a0a0;
+    background: #ebebeb;
+    float: left;
+    border: 1px solid #ddd;
+    padding: 2px 15px;
+    font-size: 14px;
+    margin-right: 5px;
+    border-radius: 30px;
+    margin-bottom: 5px;
+}
+
+#gallery_tasks{
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+#gallery_tasks li {
+    width: 100%;
+    float: left;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+#gallery_tasks li .img_holder{
+    width: 25%;
+    float: left;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#gallery_tasks li .img_holder img{
+    width: 100%;
+}
+
+#gallery_tasks li .task_data{
+    width: 75%;
+    float:left;
+    padding-left: 20px;
+}
+#gallery_tasks li .task_data .task_title{
+    width: 100%;
+    float:left;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #ddd;
+}
+#gallery_tasks li .task_data .task_title{
+ 
+}
+
+#gallery_tasks li .task_data .user_info span i {
+    margin: 0px !important;
+    font-size: 18px;
+}
+#gallery_tasks li .task_dat .comments{
+    width: 80%;
+    float: left;
+}
+/*#user_profile md-tabs.md-default-theme md-ink-bar,
+#user_profile md-tabs md-ink-bar {
+    color: #19a9e5;
+    background: #19a9e5;
+}
+
+#user_profile md-tabs .md-tab.md-active {
+    color: #19a9e5;
+}*/
+
+#user_profile #main_tabs > md-tabs-wrapper md-ink-bar {
+    color: #fff;
+    background: #fff;
+    display: none;
+}
+
+#user_profile #main_tabs > md-tabs-wrapper .md-tab.md-active{
+    background: #60ba25 ;
+    color: #fff;
+}
+#user_profile #main_tabs{
+    margin-top: 10px;
+}
+#user_profile #main_tabs > md-tabs-wrapper .md-tab{
+    line-height: 11px;
+    border-radius: 30px;
+}
+
+#user_profile #main_tabs > md-tabs-wrapper md-pagination-wrapper {
+    height: 35px;
+}
+
+
+#profile_image_edit input {
+	border: none;
+    width: 100%;
+}
+
+#profile_image_edit input:focus {
+	border: none;
+	outline: none;
+	box-shadow: none;
+}
+
+#profile_image_edit input::-webkit-file-upload-button {
+	visibility: hidden;
+}
+
+#profile_image_edit input::before {
+	content: 'Upload';
+	display: inline-block;
+	background: -webkit-linear-gradient(top, #60ba25 , #65992d);
+	border: 1px solid #60ba25 ;
+	border-radius: 2px;
+	padding: 5px 8px;
+	outline: none;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	cursor: pointer;
+	color: #fff;
+	font-weight: 700;
+	font-size: 10pt;
+	width: 100%;
+	text-align: center;
+	z-index: 9999;
+}
+
+#profile_image img{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#profile_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#editProfile .user_info h6{
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.user_info span i{
+    font-size: 25px;
+    margin: 0 10px;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+#user_profile #task_quiz_api #user_rating{
+    float: right;
+    max-width: 100px;
+}
+
+/* user profile page right side info */
+.right_user_info{
+    background: #f7f7f7;
+    padding: 15px;
+}
+#edit_profile_btn{
+    margin:0px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+.right_user_info .rating_qty{
+    background: #24a7df;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border-radius: 50%;
+    line-height: 26px;
+    text-align: center;
+}
+
+.user-stats ul {
+    width: 100%;
+    float: left;
+    list-style: none;
+}
+
+.user-stats ul li {
+    margin-bottom: 10px;
+}
+
+.user-stats ul li span {
+    display: inline-block;
+    padding-left: 10px;
+}
+.user-stats ul li span:first-child {
+    color: #24a7df;
+    font-size: 24px;
+    width: 30%;
+}
+
+#hire form{
+    padding: 15px;
+}
+
+#hire h5,
+#hire textarea{
+    margin-bottom: 10px;
+}
+
+
+#hire .set_rate md-radio-button{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+#hire #task_budget{
+    margin-bottom: 10px;
+}
+
+#hire #hire_now{
+    width: 100%;
+    margin:0;
+    margin-bottom: 10px;
+}
+
+.blue-text {
+    color:#2aa9df
+}

@@ -1,0 +1,266 @@
+<div class="main-container">
+  <div class="infowindow" id="browsertask_info" ng-class="{'transparent': transBG}">
+    <div class="col-md-8 no-pad-left left">
+      <h3 class="title_task">
+        <span id="task_title_api">{{selectedData.selectedData.task.task_title | limitTo: 50}}
+          <md-tooltip md-delay="10" md-direction="top">
+            {{selectedData.selectedData.task.task_title}}
+          </md-tooltip>
+          <span ng-if="selectedData.selectedData.task.task_title.length > 50">...</span>
+        </span>
+        <i ng-if="selectedData.selectedData.task.task_sooner == 1" class="fa fa-clock-o sooner_task" aria-hidden="true">
+          <md-tooltip md-delay="10" md-direction= "top">
+            ASAP
+          </md-tooltip></i>
+      </h3>
+      <p>Posted <span id="task_date_ago_api" am-time-ago="selectedData.selectedData.task.task_date"></span>  <small> (
+        &lt; {{selectedData.selectedData.task.distance==0 ? 1 : selectedData.selectedData.task.distance}} km )</small></p>
+      <div id="task_id" style="visibility:hidden"></div>
+      <div class="col-md-12 no-padding offers">
+        <div class="col-md-5 no-pad-left">
+        <div class="text-center count_down">
+          <h4><b>Task Start Time</b></h4>
+          <p>{{selectedData.selectedData.task.start_date | date:'EEE dd, MMM, yyyy @ hh:MM a'}}</p>
+          <p><span ng-if="!isDatePassed(selectedData.selectedData.task.start_date)">Starts in</span> <span countdown='' date="selectedData.selectedData.task.start_date"></span></p>
+        </div>
+      </div>
+      <div class="col-md-3 no-pad-left">
+        <div ng-if="selectedData.selectedData.bids.length > 0" ng-init="popoverOpened1=false" ng-mouseover="popoverOpened1=true"
+          ng-mouseleave="popoverOpened1=false" class="btn btn-primary btn-lg offer-btn">
+          <span popover-placement="bottom" uib-popover-template="offersList.templateUrl" popover-is-open="popoverOpened1">Offers<br>
+                    <span id="offer_count">{{selectedData.selectedData.bids.length}}</span>
+          </span>
+        </div>
+        <div ng-if="selectedData.selectedData.bids.length == 0" class="btn btn-primary btn-lg offer-btn">
+          <span>Offers<br>
+                    <span id="offer_count">{{selectedData.selectedData.bids.length}}</span>
+          </span>
+          <md-tooltip md-delay="10" md-direction="top">
+            No Offer made yet
+          </md-tooltip>
+        </div>
+      </div>
+      <div class="col-md-4 no-padding">
+        
+        <!-- make new offer -->
+        <div ng-if="!selectedData.myOffer && selectedData.selectedData.task.user_id != userData.id && selectedData.selectedData.task.awarded == 0 && userData  && selectedData.selectedData.task.status != 1 && !isDatePassed(selectedData.selectedData.task.start_date)" popover-is-open="makerOffer.isOpen"  ng-class="{'label-primary' : selectedData.selectedData.task.awarded == 1, 'expired': selectedData.selectedData.task.status == 1}"
+          class="btn btn-success btn-lg budget-btn" popover-placement="bottom" uib-popover-template="makerOffer.templateUrl" popover-trigger="'outsideClick'">
+          <span>Budget<br>{{selectedData.selectedData.task.task_budget == 0 ? '--OBO--' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}
+                    <span id="task_budget_api"></span><br> Make an Offer
+          </span>
+        </div>
+        <!-- already made offer -->
+        <div ng-if="(selectedData.myOffer) && userData && selectedData.selectedData.task.awarded != 1 && !isDatePassed(selectedData.selectedData.task.start_date)" class="btn btn-success btn-lg budget-btn">
+          <span>Budget<br>{{selectedData.selectedData.task.task_budget == 0 ? '--OBO--' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}
+                    <span id="task_budget_api"></span><br> Make an Offer
+          </span>
+          <md-tooltip md-delay="10" md-direction="top">
+            Already Made Your Offer
+          </md-tooltip>
+        </div>
+
+        <!-- own task -->
+        <div ng-if="selectedData.selectedData.task.user_id == userData.id && userData" ng-click="editTask(selectedData.selectedData.task.id, 'lg', isDatePassed(selectedData.selectedData.task.start_date))" class="btn btn-success btn-lg budget-btn own-task" ng-class="{'label-primary' : selectedData.selectedData.task.awarded == 1, 'expired': selectedData.selectedData.task.status == 1}">
+          <span ng-if="!isDatePassed(selectedData.selectedData.task.start_date)">Edit Task<br>
+            <span id="task_budget_api">{{selectedData.selectedData.task.task_budget == 0 ? '--OBO--' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}</span>
+          </span>
+          <span ng-if="isDatePassed(selectedData.selectedData.task.start_date)">Repost Task<br>
+            <span id="task_budget_api">{{selectedData.selectedData.task.task_budget == 0 ? '--OBO--' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}</span>
+          </span>
+          <md-tooltip md-delay="10" md-direction="top">
+            You Can't Make Offer on you own Task, Click to Post Similar Task
+          </md-tooltip>
+        </div>
+
+        <!-- already tasked -->
+      <div ng-if="selectedData.selectedData.task.awarded == 1 && userData && selectedData.selectedData.task.user_id != userData.id" class="btn btn-success label-primary btn-lg budget-btn own-task" ng-class="{'label-primary' : selectedData.selectedData.task.awarded == 1, 'expired': selectedData.selectedData.task.status == 1}">
+        <span>Budget<br>{{selectedData.selectedData.task.task_budget == 0 ? 'OBO' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}
+                  <span id="task_budget_api"></span><br>
+        </span>
+        <md-tooltip md-delay="10" md-direction="top">
+          Tasked Out
+        </md-tooltip>
+      </div>
+      <!-- make new offer -->
+    <div ng-if="!userData" class="btn btn-success btn-lg budget-btn own-task" ng-click="openLogin()" ng-class="{'label-primary' : selectedData.selectedData.task.awarded == 1, 'expired': selectedData.selectedData.task.status == 1}">
+      <span>Budget<br>{{selectedData.selectedData.task.task_budget == 0 ? 'OBO' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}
+                <span id="task_budget_api"></span><br>
+      </span>
+      <md-tooltip md-delay="10" md-direction="top">
+        Login to make an offer
+      </md-tooltip>
+    </div>
+    
+     <!-- Expired -->
+     <div ng-if="isDatePassed(selectedData.selectedData.task.start_date) && userData && selectedData.selectedData.task.user_id != userData.id && selectedData.selectedData.task.awarded == 0" ng-disabled="isDatePassed(selectedData.selectedData.task.start_date)" class="btn btn-success btn-lg budget-btn own-task">
+      <span>Budget<br>{{selectedData.selectedData.task.task_budget == 0 ? 'OBO' : (selectedData.selectedData.task.task_budget | currency:'$ ')}}
+                <span id="task_budget_api"></span><br>
+      </span>
+      <md-tooltip md-delay="10" md-direction="top">
+        Completed/Expired
+      </md-tooltip>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 no-padding">
+  <md-content  layout="column">
+    <h6 class="md-title">Skillset/Equipment requested&nbsp;<md-button ng-click="openAddTagsModal(selectedData.selectedData.task.tags)"  ng-if="userData" ng-disabled="!selectedData.selectedData.task.tags.length || selectedData.selectedData.task.tags[0] === 'No Skillset Selected'"><md-tooltip>Add tags to your profile</md-tooltip><i class="fa fa-plus-circle"></i></md-button></h2>
+      <md-chips ng-model="selectedData.selectedData.task.tags" readonly="true">
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+      <md-chip ng-model="selectedData.selectedData.task.tags" ng-if="!selectedData.selectedData.task.tags.length" ng-init="selectedData.selectedData.task.tags = ['No Skillset Selected']"></md-chip >
+  </md-content>
+</div>
+      <div class="col-md-12 no-padding desc_task">
+      <div class="col-md-12 no-padding">
+          <h6 class="md-title">Description of Task</h6>
+      </div>
+      </div>
+      <div class="about_task" id="task_description_api">{{selectedData.selectedData.task.task_description}}</div>
+      <div class="col-md-12 no-padding tag_pics">
+        <div class="col-md-12 no-padding task-picture" id="task_img_api">
+          <span ng-repeat="img in selectedData.selectedData.images">
+            <img src="{{apiURL}}/file/{{img.task_img}}" alt="{{img.task_img}}" fallback-src md-lightbox>
+          </span>
+        </div>
+        <div class="col-md-12 no-padding task_qa">
+          <div class="col-md-5 no-padding">
+              <h6 class="md-title">Task Q & A</h6>
+          </div>
+          <div class="col-md-7 no-padding" ng-if="current_user_id != 0 && selectedData.selectedData.task.user_id != userData.id">
+              <a ng-click="ask_question(selectedData.selectedData.task.user_id,'lg')" class="btn btn-default pull-right ask-btn" ng-disabled="selectedData.selectedData.task.status == 1">Ask a Question about this Task</a>
+          </div>
+          <ul id="task_quiz_api">
+            <li ng-if="selectedData.selectedData.questions"  ng-repeat="row in selectedData.selectedData.questions track by $index">
+              <a class="image_holder" ui-sref="other-profile({name: row.user_id, task: currTaskID})">
+                <img id="quiz_user_image_api" src="{{row.user_image}}" alt="No Image" fallback-src>
+              </a>
+              <div class="name_timestamp">
+                <div class="user_name pull-left">
+                  <a href="#" ui-sref="other-profile({name: row.user_id, task: currTaskID})" id="quiz_user_name_api">{{row.name}}</a>
+                </div>
+                <div class="time_stamp pull-right" id="quiz_date_ago_api" am-time-ago="row.chat_time"></div>
+                <hr>
+                <div class="question" ng-click="qs_ans_chat(row,'lg')">Q: {{row.message}}</div>
+              </div>
+            </li>
+            <li ng-if="selectedData.selectedData.questions == '' ">
+              No Questions asked yet.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 no-pad-right right">
+      <div class="pull-right">
+        <a ui-sref="tasks"><i class="fa fa-window-close"></i></a>
+      </div>
+      <div class="img-holder"><img class="img-circle" id="user_image_api" src="{{selectedData.selectedData.task.user_image}}" alt="No Image" fallback-src></div>
+      <h3 class="text-center user_name"><a href="" ui-sref="other-profile({name: selectedData.selectedData.task.user_id, task: currTaskID})" id="user_id_api">{{selectedData.selectedData.task.name}}</a></h6>
+      <div class="col-md-12 no-padding text-center user_rating">
+        <!-- <span id="task_rating_api">
+          <jk-rating-stars rating="selectedData.selectedData.task.rating" read-only="true" ></jk-rating-stars>
+        </span> -->
+
+        <span id="task_rating_api" class="col-md-12 no-padding" uib-rating ng-model="selectedData.selectedData.user_info[0].rating" titles="ratingTitle"
+          max="5" read-only="true" on-leave="overStar = null" aria-labelledby="default-rating"></span>
+
+      </div>
+      <div class="col-md-12 no-padding text-center method_of_payment">
+        <span id="paypal_active">
+          <i class="fa fa-paypal" ng-class="selectedData.selectedData.task.paypal_active==1 && 'over-icons'">
+            <md-tooltip md-delay="10" md-direction= "top">
+              Paypal
+            </md-tooltip>
+          </i>
+        </span>
+
+        <span id="stripe_active">
+          <i class="fa fa-cc-stripe" ng-class="selectedData.selectedData.task.stripe_active==1 && 'over-icons'">
+            <md-tooltip md-delay="10" md-direction= "top">
+              Stripe
+             </md-tooltip>
+          </i>
+        </span>
+
+        <span id="cash_active">
+          <i class="fa fa-usd" ng-class="selectedData.selectedData.task.cash_active==1 && 'over-icons'">
+            <md-tooltip md-delay="10" md-direction= "top">
+              Cash
+            </md-tooltip>
+          </i>
+        </span>
+        <div class="text-center" id="member_since_info">Member Since {{selectedData.selectedData.task.date | date:'dd, MMM, yyyy'}}</div>
+      </div>
+      <div class="col-md-12 no-padding text-center other_task" id="other_task_link">
+          <!-- <span>
+              <a ng-click="transBG= !transBG" class="btn btn-default btn-small">
+                  <span ng-if="!transBG">Show</span><span ng-if="transBG">Hide</span> Map
+                  <md-tooltip md-delay="10" md-direction= "top">
+                    Click here to see through the task
+                  </md-tooltip>
+                </a>
+          </span> -->
+        <span>
+          <md-tooltip md-delay="10" md-direction= "top">
+              See all other tasks from the employer
+          </md-tooltip>
+        <a ng-if="userData.id != selectedData.selectedData.task.user_id" class="btn btn-default btn-small" ng-click="myTasks('browse_task','employer', 'lg',selectedData.selectedData.task.user_id)">Other Tasks</a>
+      </span>
+        <span id="task_track_api">
+            <md-tooltip md-delay="10" md-direction= "top">
+                Track this task to get future notifications
+            </md-tooltip>
+                  <a ng-if="userData.id != selectedData.selectedData.task.user_id && currentTrackedTasks.indexOf(selectedData.selectedData.task.id.toString()) >= 0" class="btn btn-default btn-small track_tasks" ng-disabled="true">Task Tracked</a>
+                  <a ng-if="userData.id != selectedData.selectedData.task.user_id && (currentTrackedTasks.indexOf(selectedData.selectedData.task.id.toString()) == -1)" class="btn btn-default btn-small track_tasks" ng-click="trackTask(selectedData.selectedData.task.id)" ng-disabled="disabledBtn">{{trackTaskTitle}}</a>
+        </span>
+      </div>
+      <div class="col-md-12 no-padding" >
+        <div uib-carousel active="0" interval="5000" no-wrap="false" id="carousel_slider"  ng-if="selectedData.selectedData.related.length">
+          <div uib-slide ng-repeat="related in selectedData.selectedData.related track by $index" index="$index">
+              <md-list flex="">
+                  <md-list-item class="md-3-line"  ui-sref="other-profile({name: related.user_id, task: currTaskID})">
+                    <div class=image_holder>
+                      <img ng-src="{{related.user_image}}" style="margin:auto;" width="150" heigh="150" fallback-src>
+                    </div>
+                    <div class="md-list-item-text" layout="column">
+                        <a href="#" id="related_user_name_api" >{{related.name}}</a>
+                    </div>
+                  </md-list-item>
+            <div class="related_task_detail">
+              <h4 class="text-center task_title"><a  ui-sref="task({id: related.id})">{{related.task_title | limitTo: 20}}<span ng-if="related.task_title.length > 20">...</span></a></h6>
+              <div class="col-md-12 no-paddint text-center task_due">
+                <p>
+                  <span id="related_task_date"></span>{{related.start_date | date:'EEEE dd, MMM, yyyy'}}</div>
+              <p>{{related.location || "No Location Entered"}}</p>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-md-12 no-padding text-right share_task">
+          <!--<i class="fa fa-facebook-official" aria-hidden="true" id="task_share_facebook"></i>-->
+          <i socialshare socialshare-provider="facebook" socialshare-text="Taskoli" socialshare-title="{{selectedData.selectedData.task.task_title}}"
+            socialshare-description="{{selectedData.selectedData.task.task_description}}" socialshare-url="//taskoli.com/tasks/{{selectedData.selectedData.task.id}}"
+            class="fa fa-facebook-official" aria-hidden="true">
+                <md-tooltip md-delay="10" md-direction= "top">
+                  Share on Facebook
+                </md-tooltip></i>
+          <!--<i class="fa fa-twitter-square" aria-hidden="true"></i>-->
+          <i socialshare socialshare-provider="twitter" socialshare-text="{{selectedData.selectedData.task.task_description}}" socialshare-hashtags="Taskoli"
+            socialshare-url="//taskoli.com/tasks/{{selectedData.selectedData.task.id}}" class="fa fa-twitter-square" aria-hidden="true">
+                <md-tooltip md-delay="10" md-direction= "top">
+                  Share on Twitter
+                </md-tooltip></i>
+          <!--<i class="fa fa-google-plus-square" aria-hidden="true"></i>-->
+          <i socialshare socialshare-provider="google" socialshare-url="//taskoli.com/tasks/{{selectedData.selectedData.task.id}}"
+            class="fa fa-google-plus-square" aria-hidden="true">
+                <md-tooltip md-delay="10" md-direction= "top">
+                  Share on gPlus
+                </md-tooltip>
+                </i>
+        </div>
+    </div>
+  </div>

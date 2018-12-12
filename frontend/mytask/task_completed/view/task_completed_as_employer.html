@@ -1,0 +1,54 @@
+<!-- Modal content-->
+<div class="askAquestion" id="task_completed_as_tasker">
+  <form class="form-horizontal" method="post" accept-charset="utf-8" name="review">
+    <div class="col-md-4 user_info">
+      <a href="#">
+        <img fallback-src="{{fallbackImage}}" ng-src="{{taskdata.user_image}}" alt="User Image">
+      </a>
+      <input type="hidden" name="user_id" ng-model="taskdata.current_user_id" ng-init="taskdata.current_user_id=current_user_id"/>
+      <input type="hidden" name="awarded_to" ng-model="taskdata.awarded_to" ng-init="taskdata.awarded_to=awarded_to" />
+      <input type="hidden" name="check_payment" ng-model="taskdata.check_payment" ng-init="taskdata.check_payment=payment_type" />
+      <span>
+        <a ui-sref="profile({id: taskdata.employer_id})">{{taskdata.name}}</a>
+      </span>
+    </div>
+    <div class="col-md-8">
+      <div class="col-md-12 title no-padding">
+        <h6 class="col-md-10 no-pad-left pull-left" id="ques_task_title">{{taskdata.task_title}}</h6>
+        <a class="btn btn-default col-md-2 pull-right budget">${{taskdata.task_budget}}</a>
+      </div>
+      <div class="col-md-10 no-pad-left" id="actions_tabs">
+        <md-stepper id="completed" md-linear="true" md-alternative="false" md-vertical="false"
+          md-direction="bottom">
+          <md-step md-label="Payment">
+            <md-step-body>
+              <div class="task_status done" ng-init="taskdata.paymentModel = 'Cash'">
+                <label ng-model="taskdata.paymentModel" uib-btn-radio="'Cash'">Cash</label>
+                <label ng-model="taskdata.paymentModel" uib-btn-radio="'Paypal'">Paypal</label>
+              </div>
+            </md-step-body>
+            <md-step-actions>
+              <div class="accept_reject text-right col-md-12">
+                <a class="btn btn-default confirm done" ng-click="exitStepOne()" ng-diabled="taskdata.paymentModel == ''">{{BtnValue}}</a>
+                <a ng-if="BtnShow == 'show'" class="btn btn-danger md-red reject" ng-click="rejecttask(taskdata, 'lg')">Reject</a>
+              </div>
+            </md-step-actions>
+          </md-step>
+          <md-step md-label="Rating">
+            <md-step-body>
+              <span id="user_rating" uib-rating ng-model="taskdata.rate" max="5" titles="ratingTitle" read-only="false" on-leave="overStar = null"
+                aria-labelledby="default-rating"></span>
+              <textarea class="form-control" ng-model="taskdata.review" name="" id="" cols="30" rows="10" required></textarea>
+            </md-step-body>
+            <md-step-actions class="text-right">
+              <a class="btn btn-default complete_transaction" ng-click="DoneTask('employer', taskdata)" ng-disabled="review.$invalid || (taskdata.rate <= 0 || !taskdata.rate)">Complete Transaction</a>
+            </md-step-actions>
+          </md-step>
+        </md-stepper>
+      </div>
+      <div class="col-md-2 no-pad-right no-padding">
+          <a class="btn btn-default send_message" ui-sref="message({id: taskdata.id})" ui-sref-opts="{reload: true }" ng-click="closeModal()">Message</a>
+      </div>
+      </div>
+  </form>
+  </div>

@@ -1,0 +1,18 @@
+<div class="askAquestion" id="ask_question" role="dialog">
+  <div class="modal-body">
+    <form class="form-horizontal" name="sendMessage" method="post" accept-charset="utf-8">
+      <div class="user_info">
+        <a href="#"><img fallback-src src="{{userInfo.user_image}}"></a>
+        <span><a href="#">{{userInfo.name}}</a></span>
+      </div>
+      <div class="chat_submit_btn">
+        <p>Hire User For This Task</p>
+        <textarea autofocus class="form-control" rows="14" ng-model="message" name="chat_text" placeholder="any query?" onkeydown="if(event.keyCode == 13){this.form.submit();return false; }"
+          required=""></textarea>
+
+          <md-button ng-click="askQuestion(selectedData.selectedData.task[0].id,selectedData.selectedData.user_info[0].user_id,selectedData.selectedData.task[0].user_id,message)" id="chat_submit" class="md-raised md-primary pull-right" ng-disabled="!message">Send</md-button>
+          <md-button id="back_btn" ng-click="cancel()" class="md-raised pull-right"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</md-button>
+      </div>
+    </form>
+  </div>
+</div>

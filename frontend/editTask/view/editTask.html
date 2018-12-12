@@ -1,0 +1,169 @@
+<div class="row popup-task" role="dialog">
+  <div class="modal-body">
+    <div class="clearfix">
+      <md-stepper id="posttask" md-linear="true" md-alternative="false" md-vertical="false" md-direction="bottom">
+        <md-step md-label="Post Task">
+          <md-step-body>
+            <form class="form-horizontal ng-pristine ng-invalid ng-invalid-required ng-valid-minlength" id="forms" method="post" enctype="multipart/form-data"
+              name="userForm" novalidate="" ng-submit="userForm.$invalid" accept-charset="utf-8">
+              <div class="col-md-12">
+                <h3 class="modal-title text-center" id="myModalLabel">{{post_status == 'repost' ? 'Repost Task' : 'Edit Task'}}</h3>
+                <label for="task_name">Edit title of your task</label>
+                <div class="form-group" ng-class="{ 'has-error' : userForm.task_title.$invalid && !userForm.task_title.$pristine }">
+                  <input type="text" name="task_title" ng-model="taskPostData.task_title" id="task_title" class="form-control" placeholder="e.g. Clean my house"
+                    ng-minlength="10" required/>
+                  <p ng-show="userForm.task_title.$error.minlength" class="help-block">Minimum Character Required Length: 10</p>
+                </div>
+                <input type="hidden" name="id" ng-model="taskPostData.id" />
+                <input type="hidden" name="user_id" ng-model="taskPostData.user_id" ng-init="taskPostData.user_id = user_id" />
+                <div class="form-group" ng-class="{ 'has-error' : userForm.task_description.$invalid && !userForm.task_description.$pristine }">
+                  <textarea class="form-control describe_task" name="task_description" ng-model="taskPostData.task_description" id="task_description"
+                    placeholder="Let's describe your Task in more details. (better desriptions recieve better offers.)" rows="3"
+                    ng-minlength="25" required></textarea>
+                  <p ng-show="userForm.task_description.$error.minlength" class="help-block">Minimum Character Required Length: 25</p>
+                </div>
+                <div layout-wrap layout="row">
+                  <label>What skill-set/equipment shoud the tasker have?
+                    <i class="fa fa-exclamation-circle" aria-hidden="true">
+                      <md-tooltip md-delay="10" md-direction="top">
+                        Workers with this skill set/equipment will receive a notification, so you will get quotes faster.
+                      </md-tooltip>
+                    </i>
+                  </label>
+                  <br>
+                  <md-chips flex="100" ng-model="taskPostData.tags" md-require-match="false" md-highlight-flags="i" filter-selected="true"
+                    md-max-chips="30" readonly="false" md-removable="true" md-enable-chip-edit="true" md-transform-chip="newTags($chip)">
+                    <md-chip-template>
+                      <strong>{{$chip.tag}}</strong>
+                    </md-chip-template>
+                    <md-autocomplete md-selected-item="skill" md-search-text="searchText" md-items="item in getMatchesForSkills(searchText)"
+                      md-item-text="item.tag" placeholder="Search Skills" md-no-cache="true">
+                      <md-item-template>
+                        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.tag}}</span>
+                      </md-item-template>
+                      <md-not-found>
+                        Add a new Tag...
+                      </md-not-found>
+                    </md-autocomplete>
+                  </md-chips>
+                </div>
+                <div id="image_upload" class="form-group">
+                  <label for="task_name">Do you have any pictures of your task?</label>
+                  <br>
+
+                  <!--<input type="file" ng-model="task_img" name="task_img"  on-file-change="onFilesSelected"/>-->
+
+                  <input type="file" ngf-drop="upload($files)" ngf-select="upload($files)" ng-model="task_img" name="task_img" class="drop-box"
+                    ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'"
+                    ngf-max-size="20MB" />
+
+                  <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                  <ul id="task_imgs">
+                    <li ng-repeat="imag_url in taskPostData.images">
+                      <img ng-src="/api/file/{{imag_url.task_img}}" fallback-src md-lightbox md-lightbox-title="{{imag_url}}" />
+                      <a ng-click="removeFile(file)" ng-init="file = imag_url.task_img">
+                        <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                  <!--<div class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone></div>-->
+                </div>
+
+
+                <div class="form-group">
+                  <div class="col-md-6 no-pad-left budget_main">
+                    <label for="task_budget">Edit your budget</label>
+                    <div class="no-padding" ng-class="{ 'has-error' : userForm.task_budget.$invalid && !userForm.task_budget.$pristine }">
+                      <input type="number" name="task_budget" ng-model="taskPostData.task_budget" ng-min="0" ng-max="1000" class="form-control"
+                        id="task_budget" placeholder="$" ng-minlength="1" required positive min="0" />
+                      <p class="error" ng-show="userForm.task_budget.$error.positive">Amount should be positive number</p>
+                      <p ng-show="userForm.task_budget.$error.max" class="help-block">Max Budget can be $1000</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 no-padding">
+                    <label for="task_name">What time would you like the tasker to show up?</label>
+                    <input mdc-datetime-picker="" date="true" time="true" type="text" id="datetime" placeholder="Date & Time" format="dddd, MMM, DD, YYYY hh:mm A"
+                      min-date="CurrentDate" short-time="true" ng-model="taskPostData.start_date" class="form-control md-input"
+                      readonly="readonly" required minute-steps="10" auto-ok="true">
+                  </div>
+                </div>
+                <!-- <span class="budget_detail"><div class='alert alert-danger'>Minimum Character Required Length: 1 </div></span> -->
+                <!-- <span class="dateTime_detail"><div class='alert alert-danger'>Select DATE & TIME.</div></span> -->
+                <br/>
+                <div class="col-md-12 no-padding">
+                  <div class="col-md-9 no-pad-left">
+                    <input type="text" name="location" class="form-control" g-places-autocomplete options="autocompleteOptions" ng-model="taskPostData.task_location"
+                      placeholder="Were will this Task take place?" autocomplete="off" force-selection="true" required/>
+                  </div>
+                  <div class="col-md-3 no-padding">
+                    <a id="get_my_location" class="btn btn-default" ng-click="get_my_location()">Get My Location</a>
+                    <span class="map_detail"></span>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 date-time no-padding">
+                  <input type="checkbox" ng-model="taskPostData.task_sooner" name="task_sooner"> I would prefer to have this task done sooner.
+                </div>
+
+            </form>
+          </md-step-body>
+          <md-step-actions>
+            <div class="col-md-12 text-center">
+              <a ng-disabled="userForm.$invalid" ng-click="setPopupData(taskPostData)" class="btn md-blue btn-xl btn-post-tast">Post My Task!</a>
+            </div>
+          </md-step-actions>
+
+        </md-step>
+        <md-step md-label="Review Task">
+          <md-step-body>
+            <div class="col-md-12" id="review_task">
+              <h3 class="modal-title text-center" id="myModalLabel">Lets make sure everything is Correct?</h3>
+              <div class="col-md-4 no-pad-left">
+                <h4 id="task_title_preveiw">{{taskPostData.task_title}}</h3>
+                  <small class="location_of_task">{{taskPostData.task_location['formatted_address']}}</small>
+                  <small>( this will not be shown to other users. )</small>
+              </div>
+              <div class="col-md-4 text-center">
+                <div class="btn btn-budget">Budget $
+                  <span id="budget_amount">{{taskPostData.task_budget}}</span>
+                </div>
+              </div>
+              <div class="col-md-4 no-pad-right">
+                <div class="task_due_date count_down">
+                  <strong>Task Starts on</strong>
+                  <br>
+                  <span id="choosen_date">{{taskPostData.start_date | date:'EEE dd, MMM, yyyy @ hh:MM a'}}</span>
+                </div>
+              </div>
+              <div class="col-md-12 no-padding desc">
+                <h3>Your Description</h3>
+                <div class="task_desc count_down" placeholder="Task Description">{{taskPostData.task_description}}</div>
+              </div>
+            </div>
+            <input type="hidden" name="img_name" ng-model="taskPostData.img_name" ng-init="taskPostData.img_name=imag_urls">
+            <div class="col-md-12 no-padding task_photo">
+              <ul id="task_imgs">
+                <li ng-repeat="imag_url in imag_urls track by $index">
+                  <img src="/api/file/{{imag_url}}" />
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-12 address_map">
+              <div style="height:200px">
+                <ng-map center="{{data.lat}},{{data.lng}}" zoom="10" zoom-control="true" class="map">
+                  <marker draggable="false" position="{{data.lat}},{{data.lng}}"></marker>
+                </ng-map>
+              </div>
+            </div>
+          </md-step-body>
+          <md-step-actions>
+            <div class="col-md-12 text-center post_task_btn margin">
+              <a ng-click="previousStep()" class="btn md-red btn-xl edit_task">Back</a>
+              <button name="submit" class="btn btn-success btn-xl btn-post-task" ng-click="btn_post_task(taskPostData, post_status)">Post My Task!</button>
+            </div>
+          </md-step-actions>
+        </md-step>
+      </md-stepper>
+      </div>
+    </div>
+  </div>

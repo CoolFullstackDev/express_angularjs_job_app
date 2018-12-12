@@ -1,0 +1,10 @@
+#alerts {
+    padding: 0;
+    md-list {
+        padding: 0;
+        &:hover {
+            background-color: #e6e6e6;
+        }
+    }
+    
+}

@@ -1,0 +1,586 @@
+/*-------------------------
+    Simple reset
+--------------------------*/
+
+
+/*-------------------------
+    General Styles
+--------------------------*/
+
+
+/*----------------------------
+    The file upload form
+-----------------------------*/
+
+#upload,
+#upload1 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    background-color: #373a3d;
+    background-image: -webkit-linear-gradient(top, #373a3d, #313437);
+    background-image: -moz-linear-gradient(top, #373a3d, #313437);
+    background-image: linear-gradient(top, #373a3d, #313437);
+    /*    width:250px;*/
+    padding: 30px;
+    border-radius: 3px;
+    /*    margin:200px auto 100px;*/
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#drop {
+    background-color: #2E3134;
+    padding: 25px;
+    margin-bottom: 15px;
+    border: 20px solid rgba(0, 0, 0, 0);
+    border-radius: 3px;
+    border-image: url('../img/border-image.png') 25 repeat;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    color: #7f858a;
+}
+
+#drop a {
+    background-color: #007a96;
+    padding: 12px 26px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 12px;
+    line-height: 1;
+}
+
+#drop a:hover {
+    background-color: #0986a3;
+}
+
+#drop input {
+    display: none;
+}
+
+#upload ul,
+#upload1 ul {
+    list-style: none;
+    margin: 0 -30px;
+    border-top: 1px solid #2b2e31;
+    border-bottom: 1px solid #3d4043;
+}
+
+#upload ul li,
+#upload1 ul li {
+    background-color: #333639;
+    background-image: -webkit-linear-gradient(top, #333639, #303335);
+    background-image: -moz-linear-gradient(top, #333639, #303335);
+    background-image: linear-gradient(top, #333639, #303335);
+    border-top: 1px solid #3d4043;
+    border-bottom: 1px solid #2b2e31;
+    padding: 15px;
+    height: 72px;
+    position: relative;
+}
+
+#upload ul li input,
+#upload1 ul li input {
+    display: none;
+}
+
+#upload ul li p,
+#upload1 ul li p {
+    width: 144px;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #EEE;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    left: 100px;
+}
+
+#upload ul li i,
+#upload1 ul li i {
+    font-weight: normal;
+    font-style: normal;
+    color: #7f7f7f;
+    display: block;
+}
+
+#upload ul li canvas,
+#upload1 ul li canvas {
+    top: 15px;
+    left: 32px;
+    position: absolute;
+}
+
+#upload ul li span,
+#upload1 ul li span {
+    width: 15px;
+    height: 12px;
+    background: url('../img/icons.png') no-repeat;
+    position: absolute;
+    top: 34px;
+    right: 33px;
+    cursor: pointer;
+}
+
+#upload ul li.working span,
+#upload1 ul li.working span {
+    height: 16px;
+    background-position: 0 -12px;
+}
+
+#upload ul li.error p,
+#upload1 ul li.error p {
+    color: red;
+}
+
+.task-off {
+    border: 0px;
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover !important;
+}
+
+.task-off img {
+    height: 200px;
+    max-width: 247px;
+}
+
+.task-offa {
+    border: 0px;
+    background: url('../img/Office-task.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offb {
+    border: 0px;
+    background: url('../img/Welder_2-task.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offc {
+    border: 0px;
+    background: url('../img/skill.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offd {
+    border: 0px;
+    background: url('../img/truck-task.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offe {
+    border: 0px;
+    background: url('../img/sap-erp-automotive.jpg');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offf {
+    border: 0px;
+    background: url('../img/household-task.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offg {
+    border: 0px;
+    background: url('../img/yardwork.png');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-offh {
+    border: 0px;
+    background: url('../img/list-1.jpg');
+    height: 244px;
+    max-height: 244px !important;
+    padding: 0px !important;
+    background-size: cover;
+}
+
+.task-box-head {
+    font-size: 14px !Important;
+    text-transform: inherit !important;
+    padding: 7px;
+    bottom: 0px;
+    left: 0px;
+    text-align: left !important;
+    width: 100%;
+    /* padding-top: 200px; */
+    position: absolute;
+    color: #26a8e0;
+    background: rgba(255, 255, 255, 0.88);
+    margin-bottom: 0px;
+}
+
+.task-box-heada {
+    font-size: 14px !Important;
+    text-transform: inherit !important;
+    padding: 7px;
+    left: 0px;
+    text-align: left !important;
+    width: 100%;
+    margin-bottom: 0px;
+    bottom: 0px;
+    position: absolute;
+    color: #26a8e0;
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.search_categories .row .col-md-3 {
+    cursor: pointer;
+    margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+    .search_categories .row .col-md-3 {
+        width: 23%;
+        margin-right: 18px;
+    }
+}
+
+.search_categories .row .col-md-3:hover {
+    opacity: .7;
+}
+
+.col-md-12.date-time {
+    padding-left: 0px;
+}
+
+.col-md-6.task-gif {
+    padding-left: 30px;
+}
+
+h6.text-uppercase {
+    padding-top: 20px;
+}
+
+.col-md-3.no-padding.scroll-messag {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.unseen {
+    background: #eee;
+}
+
+
+/*-------------------------
+    Fonts
+--------------------------*/
+
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot');
+    src: url('../fonts/fontawesome-webfont.eot') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2') format('woff2'), url('../fonts/fontawesome-webfont.woff') format('woff'), url('../fonts/fontawesome-webfont.ttf') format('truetype'), url('../fonts/fontawesome-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font: normal normal 16px/1 'Glyphicons Halflings';
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    margin-right: 4px;
+}
+
+.task-list-description {
+    word-break: break-all;
+}
+
+.save-profile-btn {
+    position: fixed !important;
+    bottom: 5vh !important;
+    right: 5vh !important;
+    z-index: 99999999 !important;
+}
+
+md-toast {
+    position: fixed !important;
+}
+
+.ui-autocomplete {
+    position: relative;
+}
+
+
+/* start 'enter' transition */
+
+main {
+    /* transition on enter for .5s */
+    /* end 'enter' transition */
+}
+
+main.ng-enter {
+    transition: 1s;
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
+    height: 0;
+}
+
+main.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
+    height: auto;
+}
+
+#reviews li {
+    cursor: pointer;
+}
+
+.slider-text-middle {
+    background: rgba(0, 0, 0, 0.45);
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.slider-text-middle-main {
+    display: table;
+    height: 100%;
+    width: 100%;
+    background: url('/content/img/work.png') no-repeat;
+    background-size: cover !important;
+}
+
+#home-bg-vid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url('/content/img/work.png') no-repeat;
+    background-size: cover;
+    -webkit-transition: 1s opacity;
+    transition: 1s opacity;
+}
+
+.slider-text-middle-main {
+    z-index: 1;
+}
+
+.slider-text-middle {
+    color: white;
+}
+
+.btn-opaq {
+    background: transparent;
+    border-radius: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.post-btn:hover {
+    color: rgba(116, 176, 32, 1) !important;
+    background: white;
+}
+
+.lend-btn:hover {
+    color: #24a7df !important;
+    background: white;
+}
+
+.post-btn {
+    background: rgba(116, 176, 32, 1);
+    background: -moz-linear-gradient(top, rgba(116, 176, 32, 1) 0%, rgba(107, 161, 32, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(116, 176, 32, 1)), color-stop(100%, rgba(107, 161, 32, 1)));
+    background: -webkit-linear-gradient(top, rgba(116, 176, 32, 1) 0%, rgba(107, 161, 32, 1) 100%);
+    background: -o-linear-gradient(top, rgba(116, 176, 32, 1) 0%, rgba(107, 161, 32, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(116, 176, 32, 1) 0%, rgba(107, 161, 32, 1) 100%);
+    background: linear-gradient(to bottom, rgba(116, 176, 32, 1) 0%, rgba(107, 161, 32, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b020', endColorstr='#6ba120', GradientType=0);
+    color: #ffffff !important;
+}
+
+.lend-btn {
+    background: #24a7df;
+    background: -moz-linear-gradient(top, #24a7df 0%, #0097dd 100%);
+    background: -webkit-linear-gradient(top, #24a7df 0%, #0097dd 100%);
+    background: linear-gradient(to bottom, #24a7df 0%, #0097dd 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#24a7df', endColorstr='#0097dd', GradientType=0);
+    color: #fff !important;
+}
+
+textarea {
+    resize: none;
+}
+
+.navbar-right .nav-link {
+    padding: 15px;
+}
+
+h3,
+.h3 {
+    font-size: 1.2em;
+}
+
+h4,
+.h4 {
+    font-size: 1em;
+}
+
+.md-blue {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(21, 139, 222) !important;
+}
+
+.md-red {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(217, 83, 79) !important;
+}
+
+.view-messages {
+    margin: 0 !important;
+}
+
+.bid-offer {
+    margin: 5px 0;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid rgb(21, 139, 222);
+    padding: 10px;
+}
+
+.desc_task .md-title {
+    padding-bottom: 2px;
+    border-bottom: 2px solid black;
+    display: inline-block;
+}
+
+.task-picture img {
+    max-width: 100px;
+    display: inline-flex;
+}
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+    background-color: grey !important;
+    border-color: grey !important;
+}
+
+#left_side_tasks {
+    min-height: 100%;
+}
+
+#no-data {
+    text-align: center;
+    padding: 10px;
+}
+
+.md-steppers-header {
+    box-shadow: none;
+}
+
+.modal-title {
+    margin-bottom: 15px;
+}
+
+md-toast {
+    top: 50px !important;
+}
+
+.notification-text {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.fa-blue {
+    color: rgb(21, 139, 222);
+}
+
+.top_nav .md-default {
+    margin: 5px 0;
+}
+
+.sub-title {
+    margin: 25px auto;
+}
+
+.bg-blue {
+    color: white;
+    background-color: rgb(21, 139, 222);
+    padding: 0 5px;
+}
+
+.fa-exclamation-circle {
+    color: rgba(116, 176, 32, 1);
+}
+
+.md-list-item-text.align-center.text-center.layout-column {
+    flex: 1 25% !important;
+    text-align: center;
+    align-items: center;
+}
+
+.md-list-item-text.layout-column {
+    flex: 1 85% !important;
+}
+
+.md-list-item-text button {
+    margin: 5px auto;
+}
+
+b {
+    color: black;
+}
+
+#alerts {
+    padding: 0;
+}
+
+#alerts md-list {
+    padding: 0;
+}
+
+#alerts md-list-item {
+    border-bottom: 1px solid #e6e6e6;
+    word-break: break-all;
+}
+
+#alerts md-list-item:hover {
+    background-color: #e6e6e6;
+}

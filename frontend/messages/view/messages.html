@@ -1,0 +1,45 @@
+<!-- Modal -->
+<!-- Modal content-->
+<div id="messages">
+  <div class="col-md-12 fill app-body">
+    <aside ng-if="!chat_list" class="col-md-3 no-padding" id="chat-nav">
+      <div class="no-data-found">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Message Found
+      </div>
+    </aside>
+
+    <aside ng-if="chat_list" class="col-md-3 no-padding" id="chat-nav">
+      <div class="search-content" id="search_content">
+        <input class="form-control" name="detailed_search" id="detailed_search" type="text" placeholder="Search..." ng-model="search.detailed_search"
+                    ng-model-options="{ debounce: 500 }" >
+          <!-- <input class="form-control" placeholder="Search"> -->
+      </div>
+        
+      <div class="chat-nav-body">
+        <ul class="chat-list proper">
+          <li class="" ng-repeat="chat in chat_list" ui-sref="message({id: chat.task_id})" ui-sref-opts="{reload:true}">
+            <div class="cover-img">
+              <img src="{{chat.user_image}}" alt="" fallback-src>
+            </div>
+            <div class="chat-list-name-span">
+              <h3 class="name"><a ui-sref="message({id: chat.task_id})" ui-sref-opts="{reload:true}">{{chat.task_title}}</a></h3>
+              <span class="date"> {{chat.chat_time | date:'dd/M/yy'}}</span>
+            </div>
+            <div class="chat-list-message">
+              <span class="topic" ><span class="chat-author">{{chat.name}}:</span> {{chat.message}}<br></span>
+              <!-- <span class="latest-story" >Muhammad Ameer: Thanks</span> -->
+            </div>
+          </li>
+    
+        </ul>
+      </div>
+    </aside>
+    <div ui-view="message"></div> 
+    <div ng-if="currentState.parent != 'messages'" class="col-md-9 no-padding" id="chat-main-body">
+      <div class="no-data-found">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Chat Selected
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end popup -->

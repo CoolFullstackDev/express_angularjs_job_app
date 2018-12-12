@@ -1,0 +1,192 @@
+<!-- Modal My Task Popup -->
+<div class="global-modal modal fade" id="my_task_popup" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- Tasks Detail  -->
+        <div class="col-md-6 no-pad-left" id="task_detail">
+          <div class="col-md-3 no-pad-left tasker_dtl">
+            <div class="img-holder">
+              <img src="{{taskdata.user_image}}" alt="User Image">
+            </div>           
+
+            <div id="user_rating" class="col-md12 no-padding" ng-if="taskdata.rating">
+              <div class="star-rating rating-xs rating-disabled"><div class="clear-rating" title="Clear"><i class="glyphicon glyphicon-minus-sign"></i></div><div class="rating-container rating-fa" data-content=""><div class="rating-stars" data-content="" style="width:{{rate_width}}%;"></div></div>
+            </div>
+
+          </div>
+          <div id="user_name" class="col-md12 no-padding"><a href="<?= base_url('taskercontroller/tasker_profile/') ?>{{taskdata.user_id}}" class="text-center">{{taskdata.name}}</a></div> 
+          </div>
+          <div class="col-md-5 no-padding budget_price">
+            <p id="budget">Budget <span class="pull-right" ng-if="taskdata.task_budget">{{taskdata.task_budget}}</span> <span class="pull-right" ng-if="!taskdata.task_budget">N/A</span></p>
+
+            <!-- TODO:  no data in database for agreed price -->
+            <p id="agreed_price">Agreed Price <span class="pull-right">$54</span></p>
+            <div class="col-md-12 no-padding payment_methods">
+              <span id="paypal_active" ng-show="taskdata.paypal_active=='1'"><i data-toggle="tooltip" title="" data-container="body" class="fa fa-paypal over-icons" aria-hidden="true" data-original-title="Paypal"></i></span>
+
+              <span id="stripe_active" ng-show="taskdata.stripe_active=='1'"><i data-toggle="tooltip" title="" data-container="body" class="fa fa-cc-stripe over-icons" aria-hidden="true" data-original-title="Stripe"></i></span>
+
+              <span id="cash_active" ng-show="taskdata.cash_active=='1'"><i class="fa fa-usd over-icons" data-container="body" data-toggle="tooltip" title="" aria-hidden="true" data-original-title="Cash"></i></span>
+            </div>
+          </div>
+          <div class="col-md-4 no-pad-right">
+          <!-- TODO: functionality remain to send message -->
+            <a href="#" data-toggle="modal" data-target="#sendMessage" class="btn btn-default">Message</a>
+          </div>
+
+          <hr>
+
+          <div class="col-md-12 no-padding map_repost">
+            <div class="col-md-4">
+              <a href="#" class="btn btn-default">Map</a>
+            </div>
+            <div class="col-md-4">
+              <a href="#" id="repost_task" class="btn btn-default" data-toggle="modal" data-target="#myModal">Repost</a>
+            </div>
+            <div class="col-md-4 share_task">
+              <i class="fa fa-facebook-official" aria-hidden="true"></i>
+              <i class="fa fa-twitter-square" aria-hidden="true"></i>
+              <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+            </div>
+          </div>
+
+          <div class="col-md-12 no-padding task_details">
+            <h6 class="text-center">Task Details</h6>
+            <div class="col-md-3 no-pad-left">
+              Posted
+            </div>
+            <div class="col-md-5 no-padding" id="date_posted">
+              <span ng-if="taskdata.task_date">{{taskdata.task_date | date:'MMMM, dd, yyyy'  }}</span>
+              <span ng-if="!taskdata.task_date">No Data Found</span>
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_posted_stamp"> a day ago</div>
+
+            <div class="col-md-3 no-pad-left">
+              Tasked
+            </div>
+
+            <!-- TODO:  no data in database for tasked date -->
+            <div class="col-md-5 no-padding" id="date_tasked">
+              Monday 24, Feb, 2016
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_tasked_stamp">a day ago</div>
+
+            <div class="col-md-3 no-pad-left">
+              Completed
+            </div>
+            <div class="col-md-5 no-padding" id="date_completed">
+              <span ng-if="taskdata.completed_date">{{taskdata.completed_date}}</span>
+              <span ng-if="!taskdata.completed_date">No Data Found</span>
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_completed_stamp">a day ago</div>
+
+            <p id="task_description">{{taskdata.task_description}}</p>
+          </div>
+
+        </div>
+        <!-- Tasks List  -->
+        <div class="col-md-6 no-pad-right" id="tasks_list">
+          <ul class="nav nav-tabs">
+            <li><a data-toggle="tab" href="#employer_data">Employer</a></li>
+            <li><a data-toggle="tab" href="#tasker_data">Tasker</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="employer_data" class="tab-pane fade in">
+              <div class="col-md-12 no-padding task_status">
+                <label><input type="radio" value="all" name="task_status">All</label>
+                <label><input type="radio" value="open" name="task_status" >Open</label>
+                <label><input type="radio" value="tasked" name="task_status">Tasked</label>
+              </div>
+              <div class="col-md-12 no-padding task_search_sort">
+                <input type="text" class="form-control pull-left" placeholder="Search..." name="location">
+                <select class="form-control pull-right" name="" id="">
+                  <option value="">Sort by</option>
+                  <option value="">Price</option>
+                  <option value="">High</option>
+                  <option value="">Low</option>
+                  <option value="">Date</option>
+                </select>
+              </div>
+
+              <div class="col-md-12 no-padding tasks_details">
+                <ul>
+                  <li id="task_$index" task_id={{task.id}} ng-repeat="task in employerTasks track by $index" ng-click="get_task_data(task.id)" ng-class="{'selected': task.id == selected}">
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">{{task.task_title}}</span> 
+                      <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy'  }}</span>
+                    </div>
+                    <p>{{task.task_description}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div id="tasker_data" class="tab-pane fade in">
+              <div class="col-md-12 no-padding task_status">
+                <label><input type="radio" value="all" name="tasker_task_status">Offers</label>
+                <label><input type="radio" value="open" name="tasker_task_status" >Tasked</label>
+                <label><input type="radio" value="tasked" name="tasker_task_status">Completed</label>
+              </div>
+              <div class="col-md-12 no-padding task_search_sort">
+                <input type="text" class="form-control pull-left" placeholder="Search..." name="location">
+                <select class="form-control pull-right" name="" id="">
+                  <option value="">Sort by</option>
+                  <option value="">Price</option>
+                  <option value="">Newest</option>
+                  <option value="">Oldest</option>
+                </select>
+              </div>
+
+              <div class="col-md-12 no-padding tasks_details">
+                <ul>
+                  <!-- <li id="task_$index" ng-repeat="task in emolpyerTasks track by $index" ng-click="myTasks(task.id)">
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">Task Title</span> 
+                      <span id="posted_date" class="pull-right">date posted</span>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  </li> -->
+
+                  <li id="task_$index" task_id={{task.id}} ng-repeat="task in taskerTasks track by $index" ng-click="get_task_data(task.id)" ng-class="{'selected': task.id == selected}">
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">{{task.task_title}}</span> 
+                      <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy'  }}</span>
+                    </div>
+                    <p>{{task.task_description}}</p>
+                  </li>
+                  <!-- <li class="selected">
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">Task Title</span> 
+                      <span id="posted_date" class="pull-right">date posted</span>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  </li>
+                  <li>
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">Task Title</span> 
+                      <span id="posted_date" class="pull-right">date posted</span>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  </li>
+                  <li>
+                    <div class="col-md-12 no-padding"> 
+                      <span id="posted_title" class="pull-left">Task Title</span> 
+                      <span id="posted_date" class="pull-right">date posted</span>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- end popup -->

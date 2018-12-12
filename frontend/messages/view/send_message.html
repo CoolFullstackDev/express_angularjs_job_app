@@ -1,0 +1,17 @@
+<!-- Modal -->
+<div id="sendMessage" role="dialog">
+      <div class="modal-header">
+        <h4>Private Message</h4>
+      </div>
+
+        <form method="post" class="form-horizontal" ng-submit="">
+      <div class="modal-body col-md-12">
+        <textarea class="form-control" ng-model="MsgData.message" name="chat_text" placeholder="Ask a question about this task" onkeydown="if (event.keyCode == 13) { this.form.submit(); return false; }" required></textarea>
+        <input type="hidden" ng-model="MsgData.task_id" name="task_id" ng-init="MsgData.task_id = taskdata.id">
+        <input type="hidden" ng-model="MsgData.from_id" name="from" ng-init="MsgData.from_id = current_user_id">
+        <input type="hidden" ng-model="MsgData.to_id" name="to" ng-init="MsgData.to_id = sendUserId">
+      </div>
+      <div class="modal-footer">
+        <md-button class="md-raised md-primary"  ng-click="message(MsgData)">Send</md-button>
+      </div>
+      <form/>

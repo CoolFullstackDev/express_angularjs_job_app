@@ -1,0 +1,36 @@
+<div class="addTags" id="add_tags" role="dialog">
+    <div class="modal-body">
+        <ng-form class="form-horizontal" name="addTagsForm" method="post" accept-charset="utf-8" novalidate>
+            <div class="chat_submit_btn">
+                <h2>Select Tags to add into your skills</h2>
+                <div layout="row" layout-wrap>
+                    <div flex="100" layout="column">
+                        <div>
+                            <fieldset class="tags-fieldset">
+                                <legend class="tags-legend">These tags will be added into your skills for future alerts.</legend>
+                                <div layout="row" layout-wrap flex>
+                                    <div flex-xs flex="100">
+                                        <md-checkbox aria-label="Select All" ng-checked="isChecked()" md-indeterminate="isIndeterminate()" ng-click="toggleAll()"  ng-disabled="checkAllMatches(tags, preSelected)">
+                                            <span ng-if="isChecked()">Un-</span>Select All
+                                        </md-checkbox>
+                                    </div>
+                                    <div class="tags-select-all-checkboxes" flex="25" ng-repeat="item in tags track by $index">
+                                        <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)" ng-disabled="exists(item, preSelected)">
+                                            <span>{{ item }}</span>
+                                        </md-checkbox>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                
+                <div layout="row" layout-wrap layout-align="end center">
+                    <div flex-xs flex="15">
+                        <md-button focus-if class="md-raised md-primary pull-right md-button md-ink-ripple" ng-disabled="selected.length == 0" ng-click="addTags(selected)" ng-enter="addTags(selected)">SAVE</md-button>
+                    </div>
+                </div>
+            </div>
+        </ng-form>
+    </div>
+</div>

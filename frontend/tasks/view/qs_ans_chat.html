@@ -1,0 +1,46 @@
+<div class="chat_popup" role="dialog">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Q: {{question_data.message}}
+      <md-button ng-click="cancel()" class="md-raised pull-right"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</md-button>
+    </h5>
+  </div>
+  <div class="modal-body">
+    <div class="col-md-12 no-padding reply_chat">
+      <div class="reply_msg" ng-repeat="replyChat in chat_data">
+        <div class="avatar-icon"> <img src="{{replyChat.user_image}}" fallback-src> </div>
+        <div class='messages' style="padding-bottom: 18px;">
+          <div class="chatter_info"> <span class="chatter_name">{{replyChat.name}}</span>
+            <time am-time-ago="replyChat.chat_time"></time>
+          </div>
+          <p>{{replyChat.message}}</p>
+         
+        </div>
+      </div>
+    </div>
+
+    <div class="reply_box" ng-if="current_user_id">
+
+      <form method="post">
+        <div class='chat_textarea'>
+          <input type="text" ng-model="chat_text" class="form-control" placeholder="Ask a question about this task" required/>
+          <input type="hidden" name="task_id" value="{{question_data.task_id}}">
+          <input type="hidden" name="from" value="{{current_user_id}}">
+          <input type="hidden" name="task_by" value="{{question_data.by_task}}">
+          <input type="hidden" name="reply_to" value="{{question_data.id}}">
+          <input type="hidden" name="to_id" value="{{question_data.by_task}}">
+          <input type="submit" name="chat_submit" ng-click="submitChat(question_data.task_id,current_user_id,question_data.by_task,question_data.id,chat_text)"
+            class="btn btn-primary" value="Send">
+        </div>
+      </form>
+
+      <div ng-if="!current_user_id" style="text-align:center;">
+        <span class="to_join">To join the conversation</span><br>
+        <a href="#" class="btn btn-primary btn-lg signup_popup">Join Taskoli</a> <span style="margin: 10px;">or</span>
+        <a
+          href="#" class="btn btn-primary btn-lg login_popup">Login</a>
+      </div>
+
+    </div>
+  </div>
+</div>

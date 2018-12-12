@@ -1,0 +1,64 @@
+@media all and (min-width: 1366) {
+    body, p, span{
+        font-size: 18px;
+    }
+    #task-list .task-title {
+        font-size: 22px;
+    }
+
+    h6  {
+        font-size: 1em;
+    }
+    .budget {
+        font-size: 22px;
+    }
+    #browse-tasks .task_status .label {
+        font-size: 18px;
+    }
+    .fa {
+        font-size: 22px;
+    }
+    i.fa.fa-paypal, i.fa.fa-cc-stripe, i.fa.fa-usd {
+        font-size: 22px;
+    }
+    #my_task_popup #task_detail .payment_methods i {
+        font-size: 22px;
+    }
+}
+
+@media all and (min-width: 960px) {
+    .budget {
+        font-size: 20px;
+    }
+    body, p {
+        font-size: 16px;
+    }
+    h6  {
+        font-size: 0.8em;
+    }
+    #browse-tasks .task_status .label {
+        font-size: 16px;
+    }
+    .fa {
+        font-size: 22px;
+    }
+    i.fa.fa-paypal, i.fa.fa-cc-stripe, i.fa.fa-usd {
+        font-size: 22px;
+    }
+    #my_task_popup #task_detail .payment_methods i {
+        font-size: 22px;
+    }
+}
+ 
+@media all and (max-width: 959px) and (min-width: 600px) {
+    body{
+        font-size: 14px;
+    }
+}
+ 
+@media all and (max-width: 599px) and (min-width: 320px) {
+    body{
+        font-size: 12px;
+    }
+ 
+}

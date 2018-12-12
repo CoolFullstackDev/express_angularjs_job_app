@@ -1,0 +1,14 @@
+<md-dialog class="lightbox-image" aria-label="Screenshot">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2 ng-if="title" ng-bind="title"></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i aria-label="Close dialog" class="fa fa-times icon-static" aria-hidden="true"></i>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <img ng-src="{{image}}" alt="{{title}}" class="taskoli-image" fallback-src/>
+        </md-dialog-content>
+      </md-dialog>

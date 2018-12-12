@@ -1,0 +1,34 @@
+ <md-sidenav id="sidenav-right" class="md-sidenav-right" md-component-id="slide-menu"
+                md-disable-backdrop md-whiteframe="4">
+
+      <md-toolbar class="md-theme-light-blue">
+        <h1 class="md-toolbar-tools" ng-click="toggleRight()">Menu <i class="fa fa-chevron-right close-nav" aria-hidden="true"></i></h1>
+      </md-toolbar>
+      <md-content layout-margin>
+        <div ng-if="userData" class="text-center user_info">
+          <img src="{{userData.photo}}" alt="" fallback-src>
+          <br> <strong>{{userData.name}}</strong>
+        </div>
+        <div ng-if="!userData" class="text-center user_info">
+          <img src="content/img//taskoly-logo.png" fallback-src="">
+        </div>
+        <md-list-item ui-sref="home" ui-sref-active="active">
+         <i class="fa fa-home" aria-hidden="true"></i> Home
+        </md-list-item>
+         <md-list-item ui-sref="page.about" ui-sref-active="active">
+          <i class="fa fa-address-card" aria-hidden="true"></i> About
+        </md-list-item>
+        <md-list-item ui-sref="page.contactus" >
+          <i class="fa fa-envelope" aria-hidden="true"></i> Contact
+        </md-list-item>
+        <md-list-item ui-sref="page.how-it-works">
+          <i class="fa fa-list-alt" aria-hidden="true"></i> How it Works
+        </md-list-item>
+        <md-list-item ui-sref="page.faq">
+         <i class="fa fa-book" aria-hidden="true"></i>  FAQs
+        </md-list-item>
+        <!--<md-button  class="md-primary">
+          Close this Sidenav
+        </md-button>-->
+      </md-content>
+</md-sidenav>

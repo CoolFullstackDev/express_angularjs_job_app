@@ -1,0 +1,57 @@
+<!-- Modal content-->
+<div class="askAquestion" id="task_completed_as_tasker">
+        <form class="form-horizontal" method="post">
+          <div class="user_info"> 
+            <a href="#"><img fallback-src="{{fallbackImage}}" ng-src="{{taskdata.user_image}}" alt="User Image"></a>
+            <span id="user_rating" class="col-md-12 no-padding" 
+            uib-rating 
+            ng-model="taskdata.rating" 
+            titles="ratingTitle"
+            max="5" 
+            read-only="true" 
+            on-leave="overStar = null" 
+            aria-labelledby="default-rating"></span>
+
+            <span><a>{{taskdata.name}}</a></span> 
+          </div>
+          <div class="chat_submit_btn">
+            <div class="col-md-12 no-padding title">
+              <h6 class="col-md-10 no-pad-left pull-left" id="ques_task_title">{{taskdata.task_title}}</h6>
+              <a class="btn btn-default col-md-2 pull-right budget">${{taskdata.task_budget}}</a>
+            </div>
+            <div class="col-md-10 no-pad-left no-padd-left">
+              <p>{{taskdata.task_description}}</p>
+            </div>
+            <div class="col-md-2 no-pad-right no-padding">
+              <a class="btn btn-default col-md-12 send_message" ng-click="sendMessage(taskdata.user_id, 'lg')">Message</a>
+              <a class="btn btn-default col-md-12" ng-click="directionToggle()">Directions</a>
+            </div>
+
+            <!--<div class="col-sm-12 no-padding progress_bar"><uib-progressbar value="25"></uib-progressbar></div>-->
+
+            <div class="col-md-12 no-padding mark_completed">
+              <div class="col-md-10 no-pad-left no-pad-left text-right">
+                <!--Mark this Task as -->
+              </div>
+              <div class="col-md-2 no-pad-right no-padding">
+                <a class="btn btn-default col-md-12" ng-click="completeTaskAsTasker(taskdata.id,taskdata.user_id)">Completed</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div ng-if="directiontoggle" class="col-md-12 no-padding show_map">
+            <ng-map zoom="10"
+              center="{{taskdata.location}}" >
+              <directions
+                draggable="false"
+                panel="directions-panel"
+                travel-mode="DRIVING"
+                origin="{{taskdata.location}}"
+                destination="{{mapdata.lat}},{{mapdata.lng}}">
+              </directions>
+              </custom-marker>
+            </ng-map>
+          </div>
+          </form>
+</div>

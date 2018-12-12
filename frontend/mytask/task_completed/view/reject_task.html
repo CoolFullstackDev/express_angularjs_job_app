@@ -1,0 +1,19 @@
+<!-- Modal -->
+<div id="sendMessage" role="dialog">
+  <ng-form novalidate name="rejectForm">
+    <div class="modal-header">
+      <h4>Why You Are Reject this task?</h4>
+    </div>
+    <div class="modal-body col-md-12">
+      <textarea class="form-control" ng-model="rejectData.chat_text" name="chat_text" placeholder="why your are reject this task"
+        onkeydown="if (event.keyCode == 13) { this.form.submit(); return false; }" required></textarea>
+      <input type="hidden" ng-model="rejectData.task_id" name="task_id" ng-init="rejectData.task_id=taskdata.id">
+      <input type="hidden" ng-model="rejectData.owner" name="owner" ng-init="rejectData.owner=taskdata.tasker_id">
+    </div>
+    <div class="modal-footer">
+      <md-button class="md-raised" ng-click="cancel()">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i> Back</md-button>
+      <md-button class="md-raised md-primary" ng-click="reject_task(rejectData)" ng-disabled="rejectForm.$invalid">Send</md-button>
+    </div>
+  </ng-form>
+</div>

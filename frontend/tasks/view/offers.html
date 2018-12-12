@@ -1,0 +1,40 @@
+<div class="task_qa offer_hover_list">
+  <ul id="task_bid_api">
+    <li ng-repeat="bidData in selectedData.selectedData.bids">
+      <div class="image_holder">
+        <img src="{{bidData.user_image}}" fallback-src>
+      </div>
+      <!-- {{selectedData.selectedData.task}} -->
+      <!-- {{userData}} -->
+      <div class="name_timestamp">
+        <div class="user_name pull-left">
+          <small ui-sref="other-profile({name: bidData.user_id, task: bidData.task_id})">{{bidData.name}}</small>
+        </div>
+        <div class="pull-right">
+          <span id="task_rating_api" uib-rating ng-model="bidData.rating" max="5" titles="ratingTitle" read-only="true" on-leave="overStar = null"
+            aria-labelledby="default-rating"></span>
+        </div>  
+        <small class="pull-left">{{bidData.bid_date | date:'EEE dd, MMM, yyyy HH:MM a'}}</small>
+        <hr>
+        <div id="bid_rating" class="col-md-12 no-padding">
+          <div class="pull-left">
+            <span>{{bidData.bid_description | limitTo: 100}}<span ng-if="bidData.bid_description.length > 100">...</span></span>
+          </div>
+        </div>
+        <div class="row" ng-if="selectedData.selectedData.task.user_id == userData.id">
+          <div class="col-md-6 col-sm-12">
+            <span class="bid-offer">{{bidData.bid_amount | currency: '$'}}</span>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <md-button class="md-raised hire pull-right" ng-click="hire(bidData,'md')" id="hire_now" ng-if="selectedData.selectedData.task.user_id == userData.id && bidData.bid_status == 0">Hire</md-button>
+            <md-button class="md-raised hire pull-right" ng-disable id="hire_now" ng-if="bidData.bid_status == 1">Offer Sent</md-button>
+            <md-button class="md-raised hire pull-right" ng-disable id="hire_now" ng-if="bidData.bid_status == 2">Rejected</md-button>
+          </div>
+        </div>
+        </span>
+      </div>
+      <!-- <a ng-click="hire_user(bidData.user_id,'lg')" class="btn btn-default pull-right ask-btn">Hire</a> -->
+
+    </li>
+  </ul>
+</div>

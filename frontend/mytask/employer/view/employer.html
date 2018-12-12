@@ -1,0 +1,328 @@
+<!-- Modal My Task Popup -->
+<div id="my_task_popup" role="dialog" class="global-modal">
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-body">
+      <!-- Tasks Detail  -->
+      <div class="col-md-6 no-pad-left" id="task_detail" ng-if="taskdata">
+
+
+        <div ng-if="taskdata.awarded == 0" class="col-md-3 no-pad-left tasker_dtl text-center" ng-click="viewProfile({id:taskdata.user_id})">
+          <div class="img-holder">
+            <img fallback-src="{{fallbackImage}}" ng-src="{{taskdata.user_image}}" alt="User Image">
+          </div>
+
+          <div id="user_name" class="col-md12 no-padding">
+            <a class="text-center" ng-click="viewProfile({id:taskdata.user_id})">{{taskdata.name}}</a>
+          </div>
+          <div class="user_role" class="col-md-12 no-padding" ng-if="taskdata.user_id != current_user_id">(Tasker)</div>
+        </div>
+
+
+        <div ng-if="taskdata.awarded == 1" class="col-md-3 no-pad-left tasker_dtl text-center">
+          <div class="img-holder">
+            <img fallback-src="{{fallbackImage}}" ng-src="{{taskinfo.user_image}}" alt="User Image">
+          </div>
+
+          <!-- <span id="user_rating" class="col-md-12 no-padding" uib-rating ng-model="taskinfo.rating" max="5" titles="ratingTitle" read-only="true"
+            on-leave="overStar = null" aria-labelledby="default-rating"></span> -->
+
+          <div id="user_name" class="col-md12 no-padding">
+            <a href="{{site_url}}taskercontroller/tasker_profile/{{taskinfo.user_id}}" class="text-center">{{taskinfo.name}}</a>
+          </div>
+          <div class="user_role" class="col-md-12 no-padding text-center" ng-if="taskinfo.user_id != current_user_id"><small>(Tasker)</small></div>
+        </div>
+
+
+        <div class="col-md-5 no-padding budget_price">
+          <p id="budget">
+            <span class="pull-left">Budget:</span>
+            <span class="pull-right" ng-if="taskdata.task_budget">${{taskdata.task_budget}}</span>
+            <span class="pull-right" ng-if="!taskdata.task_budget">OBO/span>
+          </p>
+
+          <!-- TODO:  no data in database for agreed price -->
+          <p id="agreed_price">
+            <span class="pull-left">Offered:</span>
+            <span ng-repeat="bid in bids" ng-if="taskdata.awarded == 1">
+              <span class="pull-right" ng-if="bid.user_id == awarded_to && bid.bid_status == 1">${{bid.bid_amount}}</span>
+            </span>
+            <span class="pull-right" ng-if="taskdata.awarded == 0">Not Hired Yet</span>
+          </p>
+          <div class="col-md-12 no-padding payment_methods">
+            <span id="paypal_active">
+              <i class="fa fa-paypal" ng-class="taskdata.paypal_active==1 && 'over-icons'">
+                <md-tooltip md-delay="10" md-direction="top">
+                  Paypal
+                </md-tooltip>
+              </i>
+            </span>
+
+            <span id="stripe_active">
+              <i class="fa fa-cc-stripe" ng-class="taskdata.stripe_active==1 && 'over-icons'">
+                <md-tooltip md-delay="10" md-direction="top">
+                  Stripe
+                </md-tooltip>
+              </i>
+            </span>
+
+            <span id="cash_active">
+              <i class="fa fa-usd" ng-class="taskdata.cash_active==1 && 'over-icons'">
+                <md-tooltip md-delay="10" md-direction="top">
+                  Cash
+                </md-tooltip>
+              </i>
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4 no-pad-right" ng-if="current_user_id == taskdata.user_id">
+          <!-- TODO: functionality remain to send message -->
+          <a href="#" ng-if="taskdata.awarded == 1" ui-sref="message({id: taskdata.id})" ui-sref-opts="{reload: true }" ng-disabled="taskdata.status == 1"
+            class="btn btn-default send_message">Message</a>
+          <a href="#" ng-if="taskdata.awarded == 1 && taskdata.completed == 0" ng-disabled="true" class="btn btn-default send_message">Waiting</a>
+          <a href="#" ng-if="taskdata.awarded == 1 && taskdata.completed == 1" ng-click="task_completed_as_employer(awarded_to,'pay','lg')"
+            class="btn btn-default completed" ng-disabled="disabledBtn1 && taskdata.tasker_review != 0">Pay & Review</a>
+          <a href="#" ng-if="fnt_type == 'employer' && taskdata.awarded == 1 && (taskdata.completed == 2)" ng-click="task_completed_as_employer(awarded_to,'complete','lg')"
+            ng-hide="disabledBtn" class="btn btn-default completed">
+            Completed
+            <md-tooltip md-delay="10" md-direXXction="bottom">
+              Click here to mark the task completed
+            </md-tooltip>
+          </a>
+        </div>
+        <hr>
+        <div class="col-md-12 no-padding map_repost">
+          <div class="col-md-4 no-pad-left" ng-if="(taskdata.awarded == 1 || taskdata.completed == 1) && current_user_id != taskdata.user_id ">
+            <a href="#" ng-click="toggleMap()" class="btn btn-default">Map</a>
+          </div>
+          <div class="col-md-4 no-pad-left" ng-if="!other">
+            <a href="#" id="repost_task" ng-click="editTask(taskdata.id, 'lg','repost')" class="btn btn-default">Repost</a>
+          </div>
+          <div ng-if="taskdata.status == 0 && taskdata.awarded == 0 && !other" class="col-md-4 no-padding">
+            <a href="#" id="repost_task" ng-click="editTask(taskdata.id, 'lg','update')" class="btn btn-default">Edit Task</a>
+          </div>
+          <div class="col-md-6 no-pad-left" ng-if="other">
+            <a href="#" id="repost_task" ng-click="editTask(taskdata.id, 'lg','repost')" class="btn btn-default">Post Similar Task</a>
+          </div>
+        </div>
+
+        <div ng-if="taskdata.awarded == 1 || taskdata.completed == 1" ng-hide="toggle" class="col-md-12 no-padding show_map">
+          <ng-map zoom="10" center="{{taskdata.location}}">
+            <directions draggable="false" panel="directions-panel" travel-mode="DRIVING" origin="{{taskdata.location}}" destination="{{mapdata.lat}},{{mapdata.lng}}">
+            </directions>
+            </custom-marker>
+          </ng-map>
+        </div>
+
+        <div class="col-md-12 no-padding task_details">
+          <h3 class="text-center margin">Task Details</h3>
+          <div class="col-md-12 no-padding">
+            <div class="col-md-3 no-pad-left">
+              <h4 class="md-title">Title:</h4>
+            </div>
+            <div class="col-md-9 no-padding" id="date_posted">
+              <h3 class="md-title" ng-if="taskdata.task_title">{{taskdata.task_title}}</h3>
+            </div>
+          </div>
+          <div class="col-md-12 no-padding">
+            <div class="col-md-3 no-pad-left">
+              Posted
+            </div>
+            <div class="col-md-5 no-padding" id="date_posted">
+              <span ng-if="taskdata.task_date">{{taskdata.task_date | date:'EEEE dd, MMM, yyyy'}}</span>
+              <span ng-if="!taskdata.task_date">No Data Found</span>
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_posted_stamp" am-time-ago="taskdata.task_date"></div>
+          </div>
+          <div class="col-md-12 no-padding">
+            <div class="col-md-3 no-pad-left">
+              Tasked
+              <span></span>
+            </div>
+            <!-- TODO:  no data in database for tasked date -->
+            <div class="col-md-5 no-padding" id="date_tasked">
+              {{taskdata.tasked_date | date:'EEEE dd, MMM, yyyy' || "No Data Found"}}
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_tasked_stamp">a day ago</div>
+          </div>
+          <div class="col-md-12 no-padding" ng-if="taskdata.completed == '1' ">
+            <div class="col-md-3 no-pad-left">
+              Completed
+            </div>
+            <div class="col-md-5 no-padding" id="date_completed">
+              <span ng-if="taskdata.completed_date">{{taskdata.completed_date | date:'EEEE dd, MMM, yyyy' }}</span>
+              <span ng-if="!taskdata.completed_date">No Data Found</span>
+            </div>
+            <div class="col-md-4 no-pad-right" id="date_completed_stamp" am-time-ago="taskdata.completed_date"></div>
+          </div>
+
+          <p id="task_description">{{taskdata.task_description}}</p>
+
+          <div id="bid_list" class="col-md-12 no-padding task_qa offer_hover_list" ng-if="!taskinfo">
+            <h6>Offers list</h6>
+            <ul id="task_bid_api">
+              <li ng-if="bids == ''">There is no offer made yet.</li>
+              <li ng-if="bids != ''" ng-repeat="bidData in bids">
+                <div class="image_holder">
+                  <img src="{{bidData.user_image}}" fallback-src>
+                </div>
+                <div class="name_timestamp">
+                  <div class="user_name pull-left">
+                    <a href="#">{{bidData.name}}</a>
+                    <span id="task_rating_api" uib-rating ng-model="bidData.rating" max="5" titles="ratingTitle" read-only="true" on-leave="overStar = null"
+                      aria-labelledby="default-rating"></span>
+                  </div>
+                  <div class="time_stamp pull-right">
+                    <span id="bid_date_ago" am-time-ago="bidData.bid_date"></span>
+                    <div id="bid_rating" ng-if="user_id == taskdata.user_id">
+                      <span class="bid_amount pull-right">${{bidData.bid_amount}}</span>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="col-md-12 no-padding question">
+                    <div class="col-md-6 no-padding">
+                      <p>{{bidData.bid_description}}</p>
+                      <small>{{bidData.bid_date | date:'EEE dd, MMM, yyyy HH:MM a'}}</small>
+                    </div>
+                    <div class="col-md-6 no-padding">
+                      <md-button class="md-raised pull-right hire" ng-click="hire(bidData,'md')" id="hire_now" ng-if="user_id == taskdata.user_id">Hire</md-button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-right no-padding share_task">
+          <i socialshare socialshare-provider="facebook" socialshare-text="Taskoli" socialshare-title="{{taskdata.task_title}}" socialshare-description="{{taskdata.task_description}}"
+            socialshare-url="https://taskoli.com/tasks/{{taskdata.id}}" class="fa fa-facebook-official" aria-hidden="true">
+            <md-tooltip md-delay="10" md-direction="top">
+              Share on Facebook
+            </md-tooltip>
+          </i>
+          <!--<i class="fa fa-twitter-square" aria-hidden="true"></i>-->
+          <i socialshare socialshare-provider="twitter" socialshare-text="{{taskdata.task_description}}" socialshare-hashtags="Taskoli"
+            socialshare-url="https://taskoli.com/tasks/{{taskdata.id}}" class="fa fa-twitter-square" aria-hidden="true">
+            <md-tooltip md-delay="10" md-direction="top">
+              Share on Twitter
+            </md-tooltip>
+          </i>
+          <!--<i class="fa fa-google-plus-square" aria-hidden="true"></i>-->
+          <i socialshare socialshare-provider="google" socialshare-url="https://taskoli.com/tasks/{{taskdata.id}}" class="fa fa-google-plus-square"
+            aria-hidden="true">
+            <md-tooltip md-delay="10" md-direction="top">
+              Share on gPlus
+            </md-tooltip>
+          </i>
+        </div>
+
+      </div>
+      <div class="col-md-6 no-pad-left" id="task_detail" ng-if="!taskdata">
+        <div class="no-data-found">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Task Found
+        </div>
+      </div>
+      <!-- Tasks List  -->
+      <div class="col-md-6 no-pad-right" id="tasks_list">
+         <md-content>
+          <div class="col-md-12 text-center">
+              VIEW AS
+          </div>
+        </md-content>
+        <md-content>
+          <div class="col-md-12 no-padding popup_switch">
+            <md-button class="md-raised md-primary">Employer</md-button>
+            <md-button class="md-raised md-secondry" ng-click="my_tasks_as_tasker(current_user_id,'tasker', 'lg');">Tasker</md-button>
+          </div>
+          <div class="col-md-12 no-padding task_search_sort">
+            <input type="text" class="form-control pull-left ng-pristine ng-untouched ng-valid ng-not-empty" placeholder="Search..." autofocus
+              name="detailed_search" ng-model="employer_search.detailed_search">
+            <select class="form-control pull-right" name="task_sort" id="task_sort" ng-model="employer_search.task_sort">
+              <option value="0" disabled>Sort by</option>
+              <option value="price_high">Price High</option>
+              <option value="price_low">Price Low</option>
+              <option value="dated">Date</option>
+            </select>
+          </div>
+          <div class="col-md-12 no-padding" id="employer_data">
+            <md-tabs md-dynamic-height md-border-bottom>
+              <!-- <md-tab label="All" md-on-select="task_search_bar('all','')">
+                <md-content>
+                  <div class="col-md-12 no-padding tasks_details">
+                    <ul>
+                      <li id="task_$index" task_id={{task.id}} ng-repeat="task in employerTasks track by $index" ng-click="get_task_data('employer',task.id,task.latitude,task.longitude)"
+                        ng-init="itemClicked=='employer' && $index==0 && get_task_data(itemClicked,employerTasks[0].id,task.latitude,task.longitude)"
+                        ng-class="{'selected': task.id == selected}">
+                        <div class="col-md-12 no-padding">
+                          <span id="posted_title" class="pull-left">{{task.task_title}}</span>
+                          <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy'  }}</span>
+                        </div>
+                        <p>{{task.task_description}}</p>
+                      </li>
+                      <li ng-if="employerTasks == '' ">No Data Found</li>
+                    </ul>
+                  </div>
+                </md-content>
+              </md-tab> -->
+              <md-tab label="Open" md-on-select="task_search_bar('open','')">
+                <md-content>
+                  <div class="col-md-12 no-padding tasks_details">
+                    <ul>
+                      <li id="task_$index" task_id={{task.id}} ng-repeat="task in employerTasks track by $index" ng-click="get_task_data('employer',task.id,task.latitude,task.longitude)"
+                        ng-init="itemClicked=='employer' && $index==0 && get_task_data(itemClicked,employerTasks[0].id,task.latitude,task.longitude)"
+                        ng-class="{'selected': task.id == selected}">
+                        <div class="col-md-12 no-padding">
+                          <span id="posted_title" class="pull-left">{{task.task_title}}</span>
+                          <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy' }}</span>
+                        </div>
+                        <p>{{task.task_description | limitTo: 175}}<span ng-if="task.task_description.length >=175">...</span></p>
+                      </li>
+                      <li ng-if="employerTasks == '' ">No Data Found</li>
+                    </ul>
+                  </div>
+                </md-content>
+              </md-tab>
+              <md-tab label="Tasked" md-on-select="task_search_bar('tasked','')">
+                <md-content>
+                  <div class="col-md-12 no-padding tasks_details">
+                    <ul>
+                      <li id="task_$index" task_id={{task.id}} ng-repeat="task in employerTasks track by $index" ng-click="get_task_data('employer',task.id,task.latitude,task.longitude)"
+                        ng-init="itemClicked=='employer' && $index==0 && get_task_data(itemClicked,employerTasks[0].id,task.latitude,task.longitude)"
+                        ng-class="{'selected': task.id == selected}">
+                        <div class="col-md-12 no-padding">
+                          <span id="posted_title" class="pull-left">{{task.task_title}}</span>
+                          <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy' }}</span>
+                        </div>
+                        <p>{{task.task_description}}</p>
+                      </li>
+                      <li ng-if="employerTasks == '' ">No Data Found</li>
+                    </ul>
+                  </div>
+                </md-content>
+              </md-tab>
+              <md-tab label="Completed" md-on-select="task_search_bar('completed','')">
+                <md-content>
+                  <div class="col-md-12 no-padding tasks_details">
+                    <ul>
+                      <li id="task_$index" task_id={{task.id}} ng-repeat="task in employerTasks track by $index" ng-click="get_task_data('employer',task.id,task.latitude,task.longitude)"
+                        ng-init="itemClicked=='employer' && $index==0 && get_task_data(itemClicked,employerTasks[0].id,task.latitude,task.longitude)"
+                        ng-class="{'selected': task.id == selected}">
+                        <div class="col-md-12 no-padding">
+                          <span id="posted_title" class="pull-left">{{task.task_title}}</span>
+                          <span id="posted_date" class="pull-right">{{task.task_date | date:'MMMM, dd, yyyy' }}</span>
+                        </div>
+                        <p>{{task.task_description}}</p>
+                      </li>
+                      <li ng-if="employerTasks == '' ">No Data Found</li>
+                    </ul>
+                  </div>
+                </md-content>
+              </md-tab>
+            </md-tabs>
+
+          </div>
+        </md-content>
+      </div>
+    </div>
+  </div>

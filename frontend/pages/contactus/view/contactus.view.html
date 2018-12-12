@@ -1,0 +1,90 @@
+<header id="alt" class="contact-page">
+    <div class="wrap-content">
+        <div class="center-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>How Can We Help?</h2>
+                        <p>
+                            <span class="white">Have an issue? Contact out team so we can help. Submit the form below and we will contact you as soon as possible.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="page-content grey-shade contact-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-push-6">
+                <div class="contact-wrapper">
+                    <div class="form-box">
+
+                        <!--<?php $attributes = array("method" => "post", "name" => "contactform");
+                            echo form_open("pages/contact_action", $attributes);?>-->
+                        <div class="form-group">
+                            <label for="subject">Describe the problem you are having</label>
+                            <input type="text" class="form-control" name="subject" placeholder="Subject" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Give us more details</label>
+                            <textarea class="form-control" name="message" placeholder="" rows="6" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <!--<input type="text" value="<?php echo $this->session->userdata('user_fullname') ?>" class="form-control" name="fullname" placeholder="Your Name" required disabled />-->
+                            <input type="text" value="" class="form-control" name="fullname" placeholder="Your Name" required  />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <!--<input type="email" class="form-control" value="<?php echo $this->session->userdata('user_email') ?>" name="email" placeholder="Your Email Address" required disabled />-->
+                            <input type="email" class="form-control" value="" name="email" placeholder="Your Email Address" required  />
+                        </div>
+                        <div class="form-group text-right">
+                            <md-button class="md-raised md-primary">Submit</md-button>
+                        </div>
+                        <!--<?php echo form_close(); ?>-->
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-pull-6">
+                <h6>Should you have any questions about Taskoli, You can reach us at:
+                </h6>
+                <br>
+                <p>
+                    <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:thetribe@taskoli.com">thetribe@taskoli.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="support" class="page-content">
+    <div class="overlay-black"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="text-uppercase">Our story</h1>
+                <p class="head-lead">Find more about what we do!</p>
+                <p>&nbsp;</p>
+                <a ng-href="/page/about" class="btn btn-white btn-lg">Discover</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cta" class="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-uppercase">Browse for services</h3>
+                <br>
+                <a ui-sref="tasks" class="btn btn-primary btn-lg">Explore</a>
+            </div>
+        </div>
+    </div>
+</section>

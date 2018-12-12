@@ -1,0 +1,167 @@
+<section id="browse-tasks" class="bg-shade">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 list-tasks no-padding">
+        <div id="browser-directory">
+          <div class="holder no-padding">
+            <div id="browser-filter" class="search_task">
+              <div class="row" ng-if="showUpdateBar">
+                <div class="col-md-12 text-center margin sticky">
+                  <a ng-click="search_bar()"> New Tasks Added: Click here to see new Tasks</a>
+                </div>
+              </div>
+              <div class="col-md-12 no-padding" id="task_search">
+                <div class="search_bar" id="search_bar">
+                  <input class="form-control" name="detailed_search" id="detailed_search" type="text" placeholder="Search..." ng-model="search.detailed_search"
+                    ng-model-options="{ debounce: 500 }" ng-focus="toggleSearchBar('focus')">
+                  <a href="#" class="pull-right clear">
+                    <i ng-click="clearSearch(search)" class="fa fa-times-circle" aria-hidden="true"></i>
+                  </a>
+                  <!-- <hr> -->
+
+                  <div ng-hide="toggle" class="col-md-12 no-padding" id="search_tabs">
+                    <md-content>
+                      <md-tabs md-dynamic-height md-border-bottom>
+                        <md-tab label="Status">
+                          <md-content class="md-padding">
+                            <label ng-model="search.task_status" uib-btn-radio="'all'">All</label>
+                            <label ng-model="search.task_status" class="open" uib-btn-radio="'open'">Open</label>
+                            <label ng-model="search.task_status" class="taskedTask" uib-btn-radio="'tasked'">Tasked</label>
+                            <label ng-model="search.task_status" class="expired" uib-btn-radio="'expired'">Completed</label>
+                          </md-content>
+                        </md-tab>
+
+                        <md-tab label="Price" md-on-select="broadcastSlider()">
+                          <md-content class="md-padding">
+                            <rzslider rz-slider-model="priceSlider.minValue" rz-slider-high="priceSlider.maxValue" rz-slider-options="priceSlider.options"
+                              rz-slider-step="priceSlider.step"></rzslider>
+                            {{lastSliderUpdated}}
+                          </md-content>
+                        </md-tab>
+
+                        <md-tab label="Distance" md-on-select="broadcastSlider()">
+                          <md-content class="md-padding">
+                            <rzslider rz-slider-model="distanceSlider.minValue" rz-slider-high="distanceSlider.maxValue" rz-slider-options="distanceSlider.options"></rzslider>
+                          </md-content>
+                        </md-tab>
+
+                        <!-- <md-tab label="Posted">
+                          <md-content class="md-padding">
+                            <label ng-model="search.posted" uib-btn-radio="'newest'" ng-model-options="{ allowInvalid: true, debounce: 500 }">Newest</label>
+                            <label ng-model="search.posted" uib-btn-radio="'oldest'" ng-model-options="{ allowInvalid: true, debounce: 500 }">Oldest</label>
+                          </md-content>
+                        </md-tab> -->
+                        <md-tab label="Location">
+                          <md-content class="sm-padding">
+                            <input type="text" autocomplete="off" name="location" ng-model="search.city_name" ng-model-options="{ allowInvalid: true, debounce: 500 }"
+                              id="city_name" class="form-control" g-places-autocomplete="" options="autocompleteOptions" ng-model="task.task_location"
+                              force-selection="true" placeholder="City Name" />
+                          </md-content>
+                        </md-tab>
+                      </md-tabs>
+                      <div class="col-md-12 no-padding margin text-center">
+                        <i class="fa fa-chevron-up close_search" ng-click="toggleSearchBar('close')"></i>
+                        <i class="fa fa-chevron-up close_search" ng-click="toggleSearchBar('close')"></i>
+                        <i class="fa fa-chevron-up close_search" ng-click="toggleSearchBar('close')"></i>
+                      </div>
+                    </md-content>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="task_div" ng-cloak>
+              <ul id="task-list" infinite-scroll-parent>
+                <div id="left_side_tasks" infinite-scroll="loadMore()" infinite-scroll-disabled='busyLoadingData' infinite-scroll-distance="1" infinite-scroll-container="'#task-list'">
+                  <li ng-if="tasks.length!=0" ui-sref-active="active" class="task-thumb task-thumb-$index" id="task_$index" ng-repeat="task in tasks track by $index">
+                    <div class="col-md-3 text-center no-padding" ui-sref="other-profile({name: task.user_id, task: task.id})">
+                      <img width="60" src="{{task.user_image}}" fallback-src>
+                      <span class="task-author">
+                        <p ui-sref="other-profile({name: task.user_id, task: task.id})" class="user-fullname">{{task.name}}</p>
+                      </span>
+                      <span id="user_rating" class="col-md-12 no-padding" uib-rating ng-model="task.rating" max="5" titles="ratingTitle" read-only="true"
+                        on-leave="overStar = null" aria-labelledby="default-rating"></span>
+                    </div>
+                    <div class="col-md-6 no-padding task-list-description" ui-sref="task({id: task.id, city: search.city_name})" ui-sref-opts="{reload: 'task'}">
+                      <h2 class="task-title">{{task.task_title | limitTo: 20}}
+                        <span ng-if="task.task_title.length >= 20">...</span>
+                      </h2>
+                      <div class="col-md-12 no-padding distance">
+                        <span>
+                          &lt; {{task.distance==0 ? 1 : task.distance}} kms</span>  - Posted <span am-time-ago="task.task_date">
+                      </div>
+                      <div class="col-md-12 no-padding offer_question">
+                        {{task.ChatCounts}} comments <br> {{task.OfferCounts}} offers
+                      </div>
+                    </div> 
+                    <div class="col-md-3 no-padding" ui-sref="task({id: task.id, city: search.city_name})" ui-sref-opts="{reload: 'task'}">
+                      <div class="col-md-12 no-padding text-right budget">
+                          <i ng-if="task.task_sooner == 1 && task.status == 0" class="fa fa-clock-o sooner_task" aria-hidden="true">
+                              <md-tooltip md-delay="10" md-direction= "top">
+                                  ASAP
+                                </md-tooltip>
+                          </i>
+                         <span ng-if="task.task_budget != 0">${{task.task_budget}}</span><span ng-if="task.task_budget == 0">OBO</span><br>
+                      </div>
+
+                      <div class="col-md-12 no-padding task_status">
+                        <span ng-if="task.status == 0 && task.awarded == 0" class="label label-success">Open</span>
+                        <span ng-if="task.status == 0 && task.awarded == 1" class="label label-primary">Tasked</span>
+                        <span ng-if="task.status == 1" class="label label-danger">Completed</span>
+                      </div>
+                      <div class="col-md-12 no-padding payment_methods">
+                        <span id="paypal_active">
+                            <i class="fa fa-paypal" ng-class="task.paypal_active==1 && 'over-icons'">
+                            <md-tooltip md-delay="10" md-direction= "bottom">
+                              Paypal
+                            </md-tooltip>
+                            </i></span>
+
+                        <span id="stripe_active">
+                            <i class="fa fa-cc-stripe" ng-class="task.stripe_active==1 && 'over-icons'">
+                            <md-tooltip md-delay="10" md-direction= "bottom">
+                              Stripe
+                            </md-tooltip>
+                            </i></span>
+
+                        <span id="cash_active">
+                            <i class="fa fa-usd" ng-class="task.cash_active==1 && 'over-icons'">
+                            <md-tooltip md-delay="10" md-direction= "bottom">
+                              Cash
+                            </md-tooltip></i></span>
+                      </div>
+                    </div>
+                    <!--<div ng-show="busy">Loading data...</div>-->
+                  </li>
+                  <div ng-if="tasks.length==0" id="no-data">No data Found </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 no-padding" id="map_area">
+        <div ng-if="pauseLoading">
+          <!--<h1>Add loading spinner</h1>-->
+          <div class="spinner" layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+          </div>
+        </div>
+        <div ng-if="!pauseLoading">
+          <div ui-view="task"></div>
+          <div id="browser-filter">
+            <ng-map zoom="15" min-zoom="11" max-zoom="18" geo-fallback-center="48.45, -123.36" center="current-location" id="map" scrollwheel="true" zoom-to-include-markers="auto">
+              <shape name="circle" ng-repeat="task in tasks" no-watcher="true" stroke-color="#60ba25 " stroke-opacity="0.8" stroke-weight="2"
+                fill-color="#60ba25 " fill-opacity="0.9" center="{{task.latitude}},{{task.longitude}}" radius="30" on-click="showInfo(event, task)">
+              </shape>
+              <marker ng-if="task.latitude" ng-repeat="task in tasks" icon="{ url:'/content/img/help-logo.png', scaledSize:[25,25], origin: [0,0], anchor: [12.5, 12.5] }"
+              position="{{task.latitude}},{{task.longitude}}" title="{{task.task_title}}" on-click="showInfo(event, task)"
+              id="marker_{{task.id}}" animation="{{(task.user_id == current_user_id || task.task_id == current_user_id) ? 'BOUNCE' : 'DROP'}}">
+            </marker>
+            </ng-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

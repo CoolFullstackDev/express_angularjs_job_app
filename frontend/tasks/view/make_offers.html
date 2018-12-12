@@ -1,0 +1,10 @@
+<div class="bid_popup">
+  <h6 class="text-center">Make Your Offer</h6>
+  <form class="form-horizontal" method="post" accept-charset="utf-8">
+    <input type="number" autofocus id="amount" ng-model="maker_offer.amount" min="0" class="form-control text-center" placeholder="Enter Amount"
+      required>
+    <textarea ng-model="maker_offer.message" class="form-control" required id="bid_desc" placeholder="Description" cols="3"></textarea>
+    <button type="submit" ng-click="makeOffer(selectedData.selectedData.task.id, selectedData.selectedData.task.user_id, maker_offer)" value="Submit"
+      class="btn btn-success btn-small bid-btn">Submit Offer</button>
+  </form>
+</div>

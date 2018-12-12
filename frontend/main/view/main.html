@@ -1,0 +1,179 @@
+<nav class="navbar navbar-default top_nav" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle toggle-nav"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand" ui-sref='home'> <img src="content/img/taskoly-logo.png" fallback-src> </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <ul class="nav navbar-nav navbar-left">
+      <md-button ng-click="openPostTask();" class="md-raised md-primary md-button md-ink-ripple">Post a Task</md-button>
+      <a ui-sref="tasks" ui-sref-opts="{reload: true}">{{app.user ? 'Lend a Hand' : 'Become a Tasker'}}</a>
+      <!--<li><a ng-click="app.postTask()" class="btn btn-primary btn-lg login_popup">Task-it-Out</a></li>
+      <li><a ui-sref="tasks" ui-sref-opts="{reload: true}">Lend a Hand</a></li>-->
+    </ul>
+    <div class="navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right" ng-if="!app.user">
+        <li class="nav-link">
+          <a ui-sref="page.how-it-works">How does Taskoli work?</a>
+        </li>
+        <li class="nav-link">
+            <a ui-sref="page.faq">Support</a>
+          </li>
+        <li>
+          <!--<a ng-click="app.openLogin()" class="login_popup">Login</a>-->
+          <md-button ng-click="app.openLogin()"  class="md-button md-raised md-blue">Login</md-button>
+
+        </li>
+        <li>
+          <!--<a ng-click="app.openReg()" class="btn btn-default signup_popup sign-topbar">Join the Tribe</a> -->
+        </li>
+        <!-- <li> <a ng-click="app.toggleRight()" class="toggle-nav"><i class="fa fa-bars"></i></a> </li> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-if="app.user">
+        <!-- <a data-toggle="modal" data-target="#my_task_popup" id="my_task_popup_api">My Tasks</a> -->
+        <md-menu-bar>
+            <md-menu>
+                <button class="md-button md-default" ng-click="loadAlerts();$mdOpenMenu();">
+                    <i class="fa fa-rss fa-2 fa-blue"></i>
+                </button>
+                <md-menu-content id="alerts">
+                  <md-content>
+                    <md-list flex>
+                      <md-list-item class="md-3-line" ng-repeat="item in alerts track by $index" ng-class="{'unseen' : !item.seen}">
+                        <div class="md-list-item-text" layout="column">
+                        <a ui-sref="task({id: item.task_id})" ui-sref-opts="{reload: true}" ng-click="(item.id);">
+                          <h3>{{item.task_title}}</h3>
+                          <p>{{item.task_description}}</p>
+                        </a>
+                      </div>
+                      </md-list-item>
+                      <md-list-item ng-if="alerts.length == 0">
+                          <div class="md-list-item-text text-center notification-text" layout="column">
+                              <p>No Alerts</p>
+                          </div>
+                      </md-list-item>
+                    </md-list>
+                  </md-content>
+                </md-menu-content>
+              </md-menu>
+          <md-menu>
+            <button class="md-button md-default" ng-click="loadNotification();$mdOpenMenu();">
+                <i class="fa fa-bell fa-2 fa-blue"></i>
+                <span  ng-if="notificationCounts" class="button__badge">{{notificationCounts}}</span>
+            </button>
+            <md-menu-content id="notification">
+              <md-content>
+                <md-list flex>
+                  <md-list-item class="md-3-line" ng-repeat="item in notifications" ng-class="{'unseen' : !item.detail.seen}">
+                    <img ng-src="{{item.owner[0].user_image}}" class="md-avatar" alt="{{item.owner.name}}" fallback-src/>
+                    <div class="md-list-item-text" layout="column">
+                    <a ui-sref="task({id: item.detail.taskid})" ng-click="updateNotificationToSeen(item.detail.id);" ui-sref-options="{reload: true}">
+                      <p><b>{{ item.owner[0].name }}</b>&nbsp;{{ item.detail.text }} <h3>{{ item.task[0].task_title | limitTo: 20}}
+                        <span ng-if="item.task[0].task_title.length >= 20">...</span></h3></p>
+                        <p ng-if="item.detail.type=='hired'">Please <b>Accept</b> or <b>Decline</b> this task.</p>
+                        <p ng-if="item.detail.type=='rating'">Please click here to see the review.</p>
+                    </a>
+                  </div>
+                  <div class="md-list-item-text align-center text-center" layout="column">
+                      <div ng-if="item.detail.type=='message'">
+                        <i class="fa fa-envelope over-icons" ></i>
+                        <button ui-sref="message({id: item.task[0].id})" ui-sref-opts="{reload: true}" ng-click="updateNotificationToSeen(item.detail.id);">Read</button>
+                      </div>
+                      <div  ng-if="item.detail.type=='expired'">
+                          <i class="fa fa-warning over-icons"></i>
+                          <button ng-click="editTask(item.task[0].id, 'lg', 'repost');updateNotificationToSeen(item.detail.id);">Repost</button>
+                      </div>
+                      <i class="fa fa-money over-icons" ng-if="item.detail.type=='offer'"></i>
+                      <i class="fa fa-question-circle over-icons" ng-if="item.detail.type=='question'"></i>
+                      <div  ng-if="item.detail.type=='hired'">
+                          <i class="fa fa-thumbs-up over-icons"></i>
+                          <button ng-click="my_tasks_as_tasker(current_user_id, 'tasker', 'lg');updateNotificationToSeen(item.detail.id);">Open</button>
+                      </div>
+                      <div  ng-if="item.detail.type=='accept'">
+                          <i class="fa fa-thumbs-up over-icons"></i>
+                          <button ui-sref="message({id: item.task[0].id})" ui-sref-opts="{reload: true }" ng-click="updateNotificationToSeen(item.detail.id);">Connect</button>
+                      </div>
+                      <div  ng-if="item.detail.type=='completed'">
+                          <i class="fa fa-thumbs-up over-icons"></i>
+                          <button ng-click="my_tasks_as_amployer(current_user_id,'employer', 'lg');updateNotificationToSeen(item.detail.id);">Review</button>
+                      </div>
+                      <div  ng-if="item.detail.type=='rating'">
+                          <i class="fa fa-thumbs-up over-icons"></i>
+                          <button ui-sref="profile({id: item.detail.owner_user, '#': 'reviews'})" ui-sref-opts="{reload: true}" ng-click="updateNotificationToSeen(item.detail.id);">View</button>
+                      </div>
+                      
+                  </div>
+                  </md-list-item>
+                </md-list>
+              </md-content>
+            </md-menu-content>
+          </md-menu>
+          <md-menu>
+              <button class="md-button md-default" ng-click="loadMessages();$mdOpenMenu();">
+                  <i class="fa fa-comment fa-2 fa-blue"></i>
+                  <span  ng-if="messageCounts" class="button__badge">{{messageCounts}}</span>
+              </button>
+              <md-menu-content id="notification">
+                <md-content>
+                  <md-list flex>
+                    <md-list-item class="md-3-line" ng-repeat="item in messages track by $index" ng-class="{'unseen' : !item.seen}">
+                      <img ng-src="{{item.user_image}}" class="md-avatar" alt="{{item.name}}" fallback-src/>
+                      <div class="md-list-item-text" layout="column">
+                      <a ui-sref="message({id: item.task_id})" ui-sref-opts="{reload: true }" ng-click="updateMessageToSeen(item.id);">
+                        <h3>{{item.name}}</h3>
+                        <p>{{item.message}}</p>
+                      </a>
+                    </div>
+                    </md-list-item>
+                    <md-list-item ng-if="messages.length == 0">
+                        <div class="md-list-item-text text-center notification-text" layout="column">
+                            <p>No Messages</p>
+                        </div>
+                    </md-list-item>
+                  </md-list>
+                </md-content>
+                <md-button ui-sref="messages" ui-sref-opts="{reload: true}" class="md-blue view-messages">View all messages</md-button>
+              </md-menu-content>
+            </md-menu>
+            <button  class="md-button md-raised"  ng-click="my_tasks_as_amployer(current_user_id,'employer', 'lg');">
+              My Tasks
+            </button>
+            <!-- <md-menu-content>
+              <md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="my_tasks_as_amployer(current_user_id,'employer', 'lg');">View as Employer</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ng-click="my_tasks_as_tasker(current_user_id,'tasker', 'lg');">View as Tasker</md-button>
+                </md-menu-item>
+              </md-menu-item>
+            </md-menu-content> -->
+            <span  ui-sref="my-profile({name: app.user.id})" ui-sref-opts="{reload: true}" class="nav-profile-photo img-circle">
+              <img ng-src="{{app.user.photo}}" fallback-src>
+            </span>
+            <!-- <md-menu-content>
+              <md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="my-profile({name: app.user.id})" ui-sref-opts="{reload: true}">View Profile</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="edit-profile" ui-sref-opts="{reload: true}">Edit Profile</md-button>
+                </md-menu-item>
+                <md-menu-item>
+                  <md-button ui-sref="messages" ui-sref-opts="{reload: true}">Messages</md-button>
+                </md-menu-item>
+                <!-- <md-menu-item>
+                  <md-button>Membership</md-button>
+                </md-menu-item>
+              </md-menu-item>
+            </md-menu-content> -->
+          <!--<a ng-click="app.logout()" class="btn btn-default signup_popup sign-topbar">Logout</a>-->
+          <md-button ng-click="app.logout()" class="md-raised md-red">Logout</md-button>
+          <!-- <i ng-click="app.toggleRight()" class="fa fa-bars signup_popup sign-topbar"></i> -->
+        </md-menu-bar>
+      </ul>
+
+    </div>
+  </div>
+</nav>

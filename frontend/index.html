@@ -1,0 +1,162 @@
+<html>
+
+<head>
+    <title>Taskoli</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="description" content="We Devz">
+    <meta name="author" content="We Devz">
+    <base href="/">
+    <link rel="manifest" href="/api/service/manifest.json" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo|PT+Sans" rel="stylesheet" />
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angularjs-slider/dist/rzslider.css" />
+    <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="../bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
+    <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
+    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="../bower_components/ng-material-datetimepicker/css/material-datetimepicker.css" />
+    <link rel="stylesheet" href="../bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="../bower_components/glyphicons-only-bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../bower_components/material-steppers/dist/material-steppers.css" />
+    <!-- endbower -->
+    <!-- endinject -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/content/css/basic.css">
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/content/css/classic.css">
+    <link rel="stylesheet" href="/content/css/classic.date.css">
+    <link rel="stylesheet" href="/content/css/classic.time.css">
+    <link rel="stylesheet" href="/content/css/datepicker.css">
+    <link rel="stylesheet" href="/content/css/default.css">
+    <link rel="stylesheet" href="/content/css/default.date.css">
+    <link rel="stylesheet" href="/content/css/default.time.css">
+    <link rel="stylesheet" href="/content/css/demos.css">
+    <link rel="stylesheet" href="/content/css/featherlight.min.css">
+    <link rel="stylesheet" href="/content/css/flexslider.css">
+    <link rel="stylesheet" href="/content/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/content/css/icomoon.css">
+    <link rel="stylesheet" href="/content/css/jquery.ui.1.10.0.ie.css">
+    <link rel="stylesheet" href="/content/css/magnific-popup.css">
+    <link rel="stylesheet" href="/content/css/main-responsive.css">
+    <link rel="stylesheet" href="/content/css/main.css">
+    <link rel="stylesheet" href="/content/css/owl.carousel.css">
+    <link rel="stylesheet" href="/content/css/owl.theme.css">
+    <link rel="stylesheet" href="/content/css/responsive.css">
+    <link rel="stylesheet" href="/content/css/star-rating.css">
+    <link rel="stylesheet" href="/content/css/star-rating.min.css">
+    <link rel="stylesheet" href="/content/css/style.css">
+    <link rel="stylesheet" href="/content/css/pages/editProfile/editProfile.css">
+    <link rel="stylesheet" href="/content/css/pages/user_profile/user_profile.css">
+    <link rel="stylesheet" href="/content/css/pages/messages/messages.css">
+    <!-- endinject -->
+</head>
+
+<body ng-strict-di>
+    <div id="app-container">
+        <div ui-view="navbar" ng-cloak id- "top-nav"></div>
+        <div ui-view="side-menu" ng-cloak></div>
+        <main ui-view="content">
+            <!-- Angular views -->
+        </main>
+        <div class="footer" ng-cloak>
+            <div ui-view="footer" ng-cloak ng-hide="$state.includes('tasks') || $state.includes('messages')">
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Google Maps API with KEY-->
+<script async="true" ng-src="{{$root.trustAsResourceUrl()}}"></script>
+
+<!-- bower:js -->
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="../bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+<script src="../bower_components/ngmap/build/scripts/ng-map.js"></script>
+<script src="../bower_components/angular-socialshare/dist/angular-socialshare.min.js"></script>
+<script src="../bower_components/lodash/lodash.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/angularjs-slider/dist/rzslider.js"></script>
+<script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="../bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="../bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/angular-moment/angular-moment.js"></script>
+<script src="../bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+<script src="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
+<script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/angular-aria/angular-aria.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.js"></script>
+<script src="../bower_components/angular-material/angular-material.js"></script>
+<script src="../bower_components/ng-material-datetimepicker/js/angular-material-datetimepicker.js"></script>
+<script src="../bower_components/ngGeolocation/ngGeolocation.js"></script>
+<script src="../bower_components/socket.io-client/dist/socket.io.js"></script>
+<script src="../bower_components/angular-socket-io/socket.js"></script>
+<script src="../bower_components/angular-scroll/angular-scroll.js"></script>
+<script src="../bower_components/angular-typer/dist/typer.min.js"></script>
+<script src="../bower_components/material-steppers/dist/material-steppers.js"></script>
+<script src="../bower_components/angular-browser-push-notifications/dist/angular-browser-push-notifications.js"></script>
+<!-- endbower -->
+<!-- endinject -->
+
+<!-- inject:js -->
+<script src="/frontend/init.js"></script>
+<script src="/frontend/config/bootstrap.js"></script>
+<script src="/frontend/config/constants.js"></script>
+<script src="/frontend/config/httpInterceptors.js"></script>
+<script src="/frontend/directives/coundown.directive.js"></script>
+<script src="/frontend/directives/fallback.directive.js"></script>
+<script src="/frontend/directives/lightbox.directive.js"></script>
+<script src="/frontend/template/templates.js"></script>
+<script src="/frontend/util/countdown.util.js"></script>
+<script src="/frontend/account/controller/account.controller.js"></script>
+<script src="/frontend/account/controller/login.controller.js"></script>
+<script src="/frontend/account/route/account.state.js"></script>
+<script src="/frontend/account/service/account.service.js"></script>
+<script src="/frontend/auth/service/auth.service.js"></script>
+<script src="/frontend/editTask/service/editTask.service.js"></script>
+<script src="/frontend/editTask/controller/editTask.controller.js"></script>
+<script src="/frontend/hire/service/hire.service.js"></script>
+<script src="/frontend/hire/controller/hire.controller.js"></script>
+<script src="/frontend/home/controller/home.controller.js"></script>
+<script src="/frontend/home/route/home.state.js"></script>
+<script src="/frontend/main/controller/main.controller.js"></script>
+<script src="/frontend/main/controller/menu.controller.js"></script>
+<script src="/frontend/main/route/main.js"></script>
+<script src="/frontend/main/service/main.service.js"></script>
+<script src="/frontend/messages/controller/message.controller.js"></script>
+<script src="/frontend/messages/controller/messages.controller.js"></script>
+<script src="/frontend/messages/controller/single.message.controller.js"></script>
+<script src="/frontend/messages/services/messages.service.js"></script>
+<script src="/frontend/messages/route/messages.state.js"></script>
+<script src="/frontend/mytask/service/mytask.service.js"></script>
+<script src="/frontend/pages/route/pages.state.js"></script>
+<script src="/frontend/posttask/controller/posttask.controller.js"></script>
+<script src="/frontend/posttask/service/posttask.service.js"></script>
+<script src="/frontend/profile/controller/profile.controller.js"></script>
+<script src="/frontend/profile/route/profile.state.js"></script>
+<script src="/frontend/profile/services/profile.service.js"></script>
+<script src="/frontend/socket/factory/socket.service.js"></script>
+<script src="/frontend/tasks/route/tasks.state.js"></script>
+<script src="/frontend/tasks/controller/profile-modal.controller.js"></script>
+<script src="/frontend/tasks/controller/tags.controller.js"></script>
+<script src="/frontend/tasks/controller/task.controller.js"></script>
+<script src="/frontend/tasks/controller/tasks.controller.js"></script>
+<script src="/frontend/tasks/service/tasks.service.js"></script>
+<script src="/frontend/mytask/employer/controller/employer.controller.js"></script>
+<script src="/frontend/mytask/tasker/controller/tasker.controller.js"></script>
+<script src="/frontend/mytask/task_completed/controller/reject.controller.js"></script>
+<script src="/frontend/mytask/task_completed/controller/task_completed.controller.js"></script>
+<script src="/frontend/mytask/task_completed/service/task_completed.service.js"></script>
+<script src="/frontend/profile/edit-profile/services/edit-profile.service.js"></script>
+<script src="/frontend/profile/edit-profile/controller/edit-profile.controller.js"></script>
+<!-- endinject -->
+
+
+</html>

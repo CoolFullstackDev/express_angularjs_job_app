@@ -1,0 +1,1702 @@
+/*************************************************************
+    Author     : Adrian Rusnac Group @ http://adrianrusnac.com
+*************************************************************/
+
+.mobile_heading{
+	display: none;
+}
+
+@media (min-width:768px) {
+    #my-tasks .table-responsive {
+        overflow-x:visible;
+    }
+}
+
+@media (max-width:1600px) {
+    .window-screen {
+        max-width: 760px;
+    }
+}
+
+@media (max-width:1400px) {
+    .window-screen {
+        max-width: 600px;
+        top: 100px;
+    }
+
+    .comp-screen {
+        max-width: 400px;
+        top: 50px;
+        margin-left:0;
+    }
+}
+
+@media (max-width:1280px) {
+
+    .window-screen {
+        max-width: 480px;
+        top: 80px;
+    }
+
+    .comp-screen {
+        max-width: 400px;
+        top: 50px;
+        margin-left:0;
+    }
+
+    .moving_dot {
+        bottom: 83px;
+    }
+
+    @keyframes moving_dot {
+        0% { opacity: 0; left:180px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:230px; }
+    }
+
+    @-moz-keyframes moving_dot {
+        0% { opacity: 0; left:180px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:230px; }
+    }
+
+    @-webkit-keyframes moving_dot {
+        0% { opacity: 0; left:180px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:230px; }
+    }
+}
+
+@media (max-width:1024px) {
+    .comp-screen {
+        max-width: 400px;
+    }
+}
+
+@media (max-width:992px) {
+    .contact-wrapper {
+        margin-top:-140px;
+    }
+
+    .comp-screen {
+        position:relative;
+        margin: 0 auto 30px;
+        display:table;
+        max-width:100%;
+        top: 0;
+    }
+
+    .comp-screen.module-animated {
+        position:absolute;
+        left:0;
+        right:0;
+    }
+
+    .window-screen {
+        position:relative;
+        top:0;
+        margin:30px auto 0;
+        display:table;
+        max-width:100%;
+    }
+
+    .margin-top-fix {
+        margin-top:0;
+        margin-bottom:20px;
+    }
+
+    #browser-directory {
+        margin-bottom:20px;
+    }
+
+    .tasker-bio,
+    .taskee-bio {
+        min-height: 480px;
+    }
+
+    .right-column,
+    .left-column {
+        width:100%;
+        display: table;
+    }
+
+    #task-page .user-photo {
+        margin-bottom:10px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    #bgvid {
+        display: none;
+    }
+}
+
+@media (max-width:768px) {
+    .moving_dot {
+        bottom: 112px;
+    }
+
+    @keyframes moving_dot {
+        0% { opacity: 0; left:220px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:280px; }
+    }
+
+    @-moz-keyframes moving_dot {
+        0% { opacity: 0; left:220px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:280px; }
+    }
+
+    @-webkit-keyframes moving_dot {
+        0% { opacity: 0; left:220px; }
+        25% { opacity: 0.5; }
+        50% { opacity: 1;}
+        75% { opacity: 0.5;}
+        100% { opacity: 0; left:280px; }
+    }
+
+    html, body {
+        height:auto;
+
+    }
+
+    #alt.how-page,
+    #alt.contact-page {
+     height:345px; 
+    }
+
+    
+
+    header#main {
+        background: none;
+        background-size: cover;
+    }
+
+    
+
+}
+
+@media screen and (max-width: 767px) and (orientation:landscape){
+    
+    
+    #main .wrap-content {
+        top: 10 !important;
+    }
+    .recent_tasks > div,
+    .leaderboard .leader-trends {
+        width: 50%;
+        float: left;
+    }
+}
+@media (max-width:767px) {
+   th{
+
+    font-size:12px !important;
+  }
+  #site-menu ul li{margin:5px 0;}
+    .moving_dot {
+        display:none;
+    }
+
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border:0;
+        box-shadow:none;
+        -webkit-box-shadow:none;
+        background: #E93223;
+        margin-top: 8px;
+    }
+
+    .navbar-nav li a:after {
+        display:none;
+    }
+
+    .navbar-nav li {
+        margin:12px 15px;
+    }
+
+    header#main {
+       /* height: 500px; */
+        background: none;
+        background-size: cover;
+        overflow: hidden;
+        height: auto !important;
+    }
+
+    header#alt {
+        height:345px;
+        top:0;
+    }
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Firefox < 16 */
+    @-moz-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Safari, Chrome and Opera > 12.1 */
+    @-webkit-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Internet Explorer */
+    @-ms-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    /* Opera < 12.1 */
+    @-o-keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    .business-man {
+        max-width:100px;
+    }
+
+    #alt.how-page,
+    #alt.contact-page {
+        height:345px;
+        margin-top: 0px;
+    }
+
+    .bids-details {
+        width:100%;padding:0px;
+    }
+
+    .task-status {
+        width: 100%;
+        margin-top: 10px;
+        padding: 15px 10px;
+        line-height:1;
+        height: auto;
+    }
+    .days-left {
+        display: block;
+        line-height:1;
+        font-size: 15px;
+    }
+
+    .bids-details p {
+        font-size:12px;
+    }
+
+    .bid-no {
+        font-size:18px;
+    }
+
+    .column {
+        word-break:break-all
+    }
+
+    .table-responsive {
+        border:0;
+    }
+
+    /* by hammad */
+    .navbar-brand {
+        padding: 10px 15px;
+    }
+    .category_box{
+        margin:0px;
+        margin-bottom:20px;
+        width: 100%;
+    }
+    footer{
+        padding: 10px 0;
+        text-align: center;
+        position: relative;
+		display:none;
+    }
+    footer h6{
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    footer form.form-horizontal,
+    .social-links {
+        margin-top: 20px;
+    }
+    .recently_block {
+        width: 48%;
+        margin-left: 10px;
+        float: left;
+        position: relative;
+    }
+    .wrap-content {
+        min-height: 345px !important;
+        top: 0;
+        height: 345px;
+    }
+    #testimonials {
+        margin-top: 20px;
+    }
+
+    .task-gif{
+        margin-bottom: 30px;
+    }
+    /* #site-menu {
+        right: -600px !important;
+    } */
+
+    #site-menu .close-nav {
+        left: 10px;
+    }
+
+    .btn_browsTask{
+        display: block;
+        background: #19a9e5;
+        color: #fff;
+        padding: 10px
+    }
+    /* #help-main, .bg-green{
+        display: none;
+    } */
+    .help-main {
+        right: -10px;
+        bottom: 8px;
+        height: 90px;
+    }
+    .help, .help-detail {
+        right: 15px;
+        bottom: 15px;
+    }
+    #cta .category_box{
+        background: url(../img/icons/pen52.png);
+        height: 90px;
+        margin-bottom: 10px;
+        width: 49% !important;
+        float: left !important;
+        max-height: 100% !important;
+        /* background-size: cover; */
+        background-color: #60ba25  !important;
+        background-size: 43px !important;
+        background-repeat: no-repeat !important;
+        background-position: center 10px !important;
+    }
+    #cta .category_box:nth-of-type(even) {
+        float: right !important;
+    }
+    #cta .task-offb {
+        background: url(../img/icons/pen52.png);
+    }
+    #cta .task-offc {
+        background: url(../img/icons/phone366.png);
+    }
+    #cta .task-offd {
+        background: url(../img/icons/logistics33.png);
+    }
+    #cta .task-offe {
+        background: url(../img/icons/logistics14.png);
+    }
+    #cta .task-offf {
+        background: url(../img/icons/home134.png);
+    }
+    #cta .task-offg {
+        background: url(../img/icons/wheelbarrow6.png);
+    }
+    #cta .task-offh {
+        background: url(../img/icons/notebook83.png);
+    }
+    #cta .category_box p{
+        text-align: center !important;
+        background: transparent;
+        margin-top: 0;
+        display: block;
+        color: #fff;
+        font-size: 1em !important;
+        text-transform: uppercase !important;
+    }
+    #cta2 .category_box {
+        width: 49%;
+    }
+    #cta2 .category_box:nth-of-type(even) {
+        float: right;
+    }
+    #recently_added{
+        padding-top:35px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+    }
+    p,
+    .module-list,
+    .task-overview-description p,
+    .tasker-bio p, 
+    body{
+        font-size:14px !important;
+
+    }
+    #recently_added h3,
+    #cta2 h4,
+    #cta h3{
+        font-size: 1.6em;
+        margin-bottom: 5px;
+    }
+    h1, h2, h3, h4, h5, h6, h7,
+    ul.tab li a,
+    .task-status,
+    .task-completed span,
+    .tasker-stats span, .taskee-stats span {
+        font-size:16px !important;
+    }
+    
+    #cta{
+        padding-bottom: 3em;
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+
+    .recently_actions {
+        padding: 0px 10px;
+        padding-right: 0px;
+    }
+    .recently_photo {
+        position: relative;
+        min-height: initial;
+        max-height: initial;
+        float: left;
+        width: 128px;
+        height: 100px;
+    }
+    .recently_photo img {
+        position: relative;
+        float: left;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+    .recently_block{
+        min-height: initial;
+    }
+    .task_tag,
+    .recently_details b,
+    .recently_media{
+        display: none;
+    }
+    .recently_details {
+        padding: 5px 10px;
+        max-height: 72px;
+    }
+    .recently_details .title{
+        color: #19a9e5;
+        display: block;
+        float: left;
+        width: 100%;
+        margin-bottom: 3px;
+        height: 20px;
+        overflow: hidden;
+    }
+    .recently_actions:before{
+        content: initial;
+    }
+	#browse-tasks{
+		padding-top:0px;
+	}
+	.list-tasks{
+		background:#fff;
+	}
+	#browse-tasks #browser-directory{
+		height:50vh;
+		overflow-y:auto;
+		padding-top: 50px;
+		margin-bottom:0px;
+	}
+    #browse-tasks #browser-directory #task_div {
+        /*max-height: 326px;
+        height: auto;
+        overflow-y: auto;*/
+    }
+    #browse-tasks #browser-directory #task_div #task-list{
+        height: auto;
+        overflow: auto;
+    }
+    .map-markers #browser-filter{
+        height:50vh;
+    }
+    #browse-tasks #task-list .task-left {
+        margin-bottom: 0px;
+        margin-right: 10px;
+        height: 50px;
+        width: 50px;
+        display: block;
+    }
+	.infowindow .top >div {
+        width: 100% !important;
+        float: left;
+        margin: 0px;
+        height: auto !important;
+        padding: 0px;
+        min-height: auto !important;
+        background: #f7f7f7;
+        color: #444;
+        text-align: left;
+		margin-bottom:5px;
+    }
+	.infowindow .top >div br,
+	.infowindow .top >div.earn,
+	.infowindow .top >div.amount,
+	.infowindow .bottom > span:first-child,
+	.infowindow .bottom > br {
+        display: none;
+    }
+	.infowindow .top .bold{
+		margin-top:0px;	
+	}
+    .task-description p{
+        line-height: 1;
+        margin-top: 6px;
+        margin-right: 10px;
+    }
+    #browse-tasks .task-details{
+        width: 75% !important;
+        text-align: left !important;
+        overflow: hidden;
+        margin-top: 5px;    
+    }
+    #browse-tasks .task-right {
+        width: auto !important;
+        float: right;
+    }
+	#browse-tasks .task-description{
+		display:none;
+	}
+    
+    #browse-tasks .task-author {
+        margin-top: 6px;
+        float: left;
+        width: 100%;
+    }
+    #browse-tasks .holder {
+        box-shadow:none;
+        border:none;
+    }
+    #browse-tasks .task-left img {
+        border-radius: 0px;
+        border-right: 1px solid #ccc;
+    }
+    #browse-tasks .task-thumb{
+        box-shadow: 0 2px 1px rgba(0,0,0,.1);
+        margin-bottom: 2px;
+        border-radius: 4px;
+        overflow: hidden;
+        padding: 0;
+    }
+    #browse-tasks .task-thumb .task-left img{
+        margin-bottom: 0;
+        width: 100%;
+        height: auto;
+    }
+    #browse-tasks .task-author,#browse-tasks .user-reviews{
+        display: none;
+    }
+    .infowindow .image{
+        display: none;
+    }
+    .infowindow .amount2{
+        width: 50.5%;
+
+    }
+    .infowindow .amount1{
+        width:48%;
+    }
+    .earn {
+        width: 48% !important;
+    }
+    .amount{
+        width:50% !important;
+    }
+    .post-main{
+        text-align: center;
+    }
+    .explore_more,
+    #cta2,
+    #how{
+        display: none;
+    }
+    .mobile_profile_menu{
+        display: block !important;
+    }
+    .after_login_dp{
+        padding-bottom:0px !important;
+    }
+    .mobile_profile_menu {
+        border: none;
+        -webkit-box-shadow:none;
+        box-shadow: none;
+    }
+    .post-main a{
+        display: inline-block;
+        float: none !important;
+    }
+
+
+    /**************  TABLE RESPONSIVE  **************/
+    #completed-tasks,
+    #expired-tasks,
+    #my-tasks tbody td:first-child{
+    	width: 100% !important;
+    }
+
+    #employer_task > div, #tasker_tasks #my-tasks > div{
+    	height: auto;
+    	border:none;
+    	background: transparent;
+    }
+    .home-page-slider{
+    	top: 50px;
+    	height: 100%;
+    }
+    /* Force table to not be like tables anymore */
+	#overview-tasks table { 
+	  width: 100%; 
+	  border-collapse: collapse; 
+	}
+	/* Zebra striping */
+	#overview-tasks tr:nth-of-type(odd) { 
+	  background: #eee; 
+	}
+	#overview-tasks th { 
+	  background: #333; 
+	  color: white; 
+	  font-weight: bold; 
+	}
+	#overview-tasks td, #overview-tasks th { 
+	  padding: 6px; 
+	  border: 1px solid #ccc; 
+	  text-align: left; 
+	}
+	#overview-tasks table,
+	#overview-tasks thead,
+	#overview-tasks tbody,
+	#overview-tasks th,
+	#overview-tasks td,
+	#overview-tasks tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	#overview-tasks thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	#overview-tasks tr { border: 1px solid #ccc; }
+	
+	#overview-tasks td {
+	    border: none;
+	    border-bottom: 1px solid #eee !important;
+	    position: relative;
+	    padding-left: 50% !important;
+	}
+		
+	#overview-tasks td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 12px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	/* Label the data */
+	#in-progress-tasks td:nth-of-type(1):before { content: "Task"; }
+	#in-progress-tasks td:nth-of-type(2):before { content: "Tasker"; }
+	#in-progress-tasks td:nth-of-type(3):before { content: "Offer"; }
+	#in-progress-tasks td:nth-of-type(4):before { content: "Message To Tasker"; }
+	#in-progress-tasks td:nth-of-type(5):before { content: "Allow Directions"; }
+	#in-progress-tasks td:nth-of-type(6):before { content: "Action"; }
+
+	#open-tasks td:nth-of-type(1):before { content: "Task"; }
+	#open-tasks td:nth-of-type(2):before { content: "Employer"; }
+	#open-tasks td:nth-of-type(3):before { content: "Budget"; }
+	#open-tasks td:nth-of-type(4):before { content: "Action"; }
+	#open-tasks td:nth-of-type(5):before { content: "Share"; }
+
+	#completed-tasks td:nth-of-type(1):before { content: "Task"; }
+	#completed-tasks td:nth-of-type(2):before { content: "Tasker"; }
+	#completed-tasks td:nth-of-type(3):before { content: "Offer"; }
+	#completed-tasks td:nth-of-type(4):before { content: "Task Detail"; }
+
+	#expired-tasks td:nth-of-type(1):before { content: "Task"; }
+	#expired-tasks td:nth-of-type(2):before { content: "Budget"; }
+	#expired-tasks td:nth-of-type(3):before { content: "Task Detail"; }
+	#expired-tasks td:nth-of-type(4):before { content: "Post"; }
+
+	.mobile_heading{
+		display: block;
+	    text-align: center;
+	    background: #60ba25 ;
+	    margin: 0px !important;
+	    padding: 10px 0px;
+	    color: #fff;
+	    font-size: 18px;
+	}
+
+    /************  END OF TABLE RESPONSIVE  ****************/
+
+    #overview-tasks{
+    	padding-top:70px;
+        padding-bottom: 0;
+    }
+
+    #overview-tasks .sub-nav{
+    	padding-top:0px;
+    }
+    #overview-tasks .act-bread1,
+    #overview-tasks .act-bread{
+    	margin-bottom: 20px;
+    }
+    #overview-tasks .task-pr-status {
+	    margin-top: 4px;
+	    font-size: 13px;
+	    padding: 4px 15px;
+	}
+
+    .date-time input#datepicker,
+    .date-time input#timepicker{
+    	width: 100% !important;
+    	margin-bottom: 5px !important;
+    }
+    .date-time,
+    .wizard-step1{
+    	padding:0px;
+    }
+    #myModal .holder{
+    	border:none;
+    	padding:0px !important;
+    }
+    .popup-task label{
+    	float: left;
+	    width: 100%;
+	    margin-top: 10px;
+	}
+	.wizard-step div {
+	    width: 100%;
+	    float: left;
+	}
+	#task_type_main{
+		margin: 0;
+	    padding: 0;
+	}
+	#task_type_main > div{
+		margin: 0;
+	    padding: 0;
+	}
+	.budget_main > div{
+		width: 50%;
+	}
+	.date-time .picker__nav--next{
+	    float: right !important;
+	    width: auto;
+	}
+	.date-time .picker__nav--prev{
+		width: auto !important;
+	}
+	/* .date-time .picker__holder{
+	    left: 0;
+	    right: 0;
+	    margin: 0 auto;
+	} */
+    .private-message .holder,
+    .private-message #browser-filter{
+        height: auto;
+    }
+    .private-message .holder{
+        overflow-y: auto;
+    }
+    .private-message .chat-box{
+        min-height: auto;
+        padding-top: 32px;
+        padding-bottom: 61px;
+        height: 90vh;
+        border: 0px;
+    }
+    .private-message {
+        padding-top: 60px !important;
+        padding-bottom: 0px !important;
+    }
+    .private-message .top-header {
+        background: rgb(129, 188, 65);
+        color: #fff;
+        position: fixed;
+        width: 100%;
+        z-index: 99;
+    }
+    .submit_chat{
+        width: 100%;
+    }
+    .submit_chat input{
+        float: right;
+    }
+    .top-header-tit i{
+        margin-left: 5px;
+        margin-right: 5px;
+        float: left;
+        font-size: 15px;
+        margin-top: 2px;
+        color: #fff;
+    }
+    .back_to_chat_list i:before {
+        margin-right: 5px;
+    }
+    .private-message #browser-directory {
+        margin-bottom:0px;
+    }
+    .private-message .task-author{
+        display: block !important;
+    }
+    .private-message .sub-nav .task-pr-status {
+        font-size: 12px;
+    }
+
+    #settings form > div:nth-of-type(3) {
+        padding: 0;
+    }
+    .private-message  #task-list li{
+        border-bottom: 1px #ececec solid;
+        padding: 10px 15px;
+    }
+    .private-message .messages {
+        width: 90% !important;
+    }
+    .private-message .task-left img {
+        height: 50px;
+        width: 50px;
+    }
+    .employee_title {
+        margin-left: 20px;
+        margin-top: 9px;
+        color: #222;
+    }
+    .private-message #task-list .task-left{
+        margin:0;
+    }
+    .notify_completed,
+    .btn[data-target="#sendMessage"]{
+        width: 140px;
+    }
+   /*  #chat-application .button-text{
+       padding-left: 0;
+       padding-right: 4px;
+   }
+   #chat-application #buttonPanel{
+       right: 0;
+   } */
+    #tasker_tasks{
+        padding:0 15px !important;
+    }
+    .popup-taskID #modal-dialog{
+        margin-right: 0px;
+    }
+    #alt.overview-page,
+    #alt.no-header{
+        background: transparent !important;
+        height: auto !important;
+    }
+    #profile-header, #task{
+        margin-top: 0px;
+    }
+    .task_overview #task .holder,
+    .task_overview .holder .left-column div{
+        padding:0 !important;
+    }
+    .task_overview #browser-filter .holder{
+        padding: 10px !important;
+    }
+    #overview-tasks .flexslider.carousel{
+        margin-bottom:10px;
+    }
+    
+    #overview-tasks .holder .left-column h7 {
+        width: 100%;
+        text-align: right;
+    }
+    #overview-tasks .holder .left-column h4{
+        font-size: 22px;
+        margin-top: 10px !important;
+        float: left;
+        margin-bottom: 10px !important;
+        text-align: center;
+        width: 100%;
+    }
+    #overview-tasks .task-overview-description .task-description p{
+        height: auto;
+        overflow: auto;
+    }
+    #overview-tasks .task-overview-description .task-description{
+        text-align: center;
+        margin-bottom:20px;
+    }
+    #overview-tasks .task-completed span{
+        width: 257px;
+        display: block;
+        float: none;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom:10px;
+    }
+    #overview-tasks #about-tasker {
+        text-align: center;
+    }
+    #about-tasker .h7.text.center {
+        font-size: 14px;
+    }
+    #about-tasker .verification-iconsname > div {
+        margin-bottom:5px;
+    }
+    #about-tasker .your_employer,
+    #about-tasker .logged_in{
+        border-top:1px solid #ccc;
+    }
+    .flag-task-overview{
+        text-align: center;
+    }
+    .flag-task-overview a{
+        float: none;
+    }
+    #support{
+        display: none;
+    }
+    .task_overview{
+        padding-top: 12px !important;
+    }
+    .task_overview .left-column hr{
+        display: none;
+    }
+    .task_photos{
+        text-align: center;
+    }
+    .breadcrumb>li {
+        font-size: 14px;
+    }
+    .task_overview .user_name{
+        font-size: 16px;
+    }
+
+    .tasker-profile .tasker-photo{
+        margin:0 auto;
+    }
+    .tasker-profile .holder > br{
+        display: none;
+    }
+    .main-details{
+        padding:10px 0px;
+    }
+    .tasker-bio, .taskee-bio,
+    .tasker-profile .reviews-profile{
+        min-height: auto;
+    }
+    .tasker-profile .row.whole-bg-col{
+        margin:0px;
+    }
+    .tasker-profile{
+        padding-top: 0px !important;
+    }
+    #reviews{
+        text-align: center;
+    }
+    .tasker-profile .reviews-profile{
+        width: 100%;
+        float: left;
+        padding:5px 0px;
+    }
+    .tasker-profile .tasker-stats{
+        margin-top:5px;
+    }
+    .tasker-profile .reviews-profile-nobg{
+        padding: 0px !important;
+    }
+    .rev-sec{
+        float: left;
+        width: 100%;
+    }
+    .row.content-set{
+        min-height: auto;
+        padding: 5px 0px;
+    }
+    .personal-info h5 {
+        margin: 10px 0px !important;
+        text-align: center;
+    }
+    .edit_profile{
+        padding-top: 10px !important;
+    }
+    /*for edit profile page only */
+    .personal-info{
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+    }
+    .personal-info .form-group{
+        padding:0px;
+        margin-bottom:5px;
+    }
+    .personal-info .form-group > div, 
+    .personal-info .form-group > label {
+        padding: 0;
+    }
+    .personal-info .form-group > label {
+        margin-bottom: 5px;
+    }
+    .personal-info .transport-type input{
+        margin-top: 0px;
+        margin-bottom:5px;
+    }
+    .personal-info .payment-setting input{
+        margin-top: 0px;
+    }
+    /* end */
+    .edit_profile .give .holder > h5{
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    
+    .tasks_review .give{
+        padding: 0px;
+    }
+    .edit_profile_main .give{
+        padding:0px;
+        margin-top: 15px;
+    }
+
+    .head-lead {
+        margin-top: 10px;
+    }
+    .section_title h2 {
+        font-size: 24px;
+    }
+    #how-it-works h3{
+        font-size: 24px;
+        text-align: center;
+    }
+    #how-it-works section,
+    #aboutUs section,
+    #faq-module{
+        padding: 15px 0px;
+    }
+    #aboutUs br,
+    #how-it-works br{
+        display: none;
+    }
+    #aboutUs h6{
+        margin-top: 10px;
+    }
+    #aboutUs h6{
+        padding-top: 2px;
+    }
+    #faq-module{
+        padding-bottom: 0px;
+    }
+    #step-3 br{
+        display: none;
+    }
+
+    #edit_post_task .row.holder{
+        margin:0px;
+    }
+    #edit_post_task h5{
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    #edit_post_task #task-post > div{
+        padding:0px;
+    }
+    #edit_post_task .task_step{
+        display: none;
+    }
+    #edit_post_task #task-post .form-group{
+        margin:0px;
+    }
+    #edit_post_task #us22{
+        width: 100% !important;
+        padding:0px;
+        margin:20px 0px;
+    }
+    #task-post label {
+        font-size:14px;
+    }
+    #edit_post_task #task-post label {
+        margin:10px 0px;
+    }
+    #edit_post_task .date-time2{
+        margin-bottom: 20px !important;
+    }
+    #example3 {
+        margin-bottom: 20px; 
+    }
+    #edit_post_task  #finish{
+        margin: 0 auto;
+        float: none;
+        display: block;
+    }
+    .leaderboard{
+        margin:0px;
+        padding: 0px !important;
+    }
+    .terms-page{
+        text-align: center;
+    }
+    .leaderboard .get > .holder{
+        margin-top: 20px;
+    }
+    .leaderboard .leader-trends {
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+    .recent_tasks .task-img{
+        padding: 0 15px;
+    } 
+    .slider-row {
+        padding: 0 15px !important;
+        margin-top: 20px
+    } 
+    .leaderboard .no-left-pad p {
+        margin-bottom: 10px;
+        text-align: center;
+        margin-top: 2px;
+    }
+    .leaderboard .main-details p, .leaderboard h6{
+        text-align: center;
+    }
+    .main-details,
+    .contact-page,
+    .contact-form h6,
+    .contact-form .col-md-6.col-md-pull-6 p,
+    .faq-page {
+        text-align: center;
+    }
+    #main .wrap-content{
+        top:0px;
+        height: 345px;
+        padding-top: 25px !important;
+    }
+
+    #faq-module br,
+    .slider-row br {
+        display: none;
+    }
+    .leaderboard .buyit{
+        margin-top: 10px;
+    }
+    .page-content {
+        padding: 15px 0px;
+    }
+    .contact-wrapper {
+        margin-top: 0px;
+        padding: 10px;
+    }
+    .contact-wrapper button[type="submit"]{
+        margin: 0 auto;
+        display: block;
+    }
+    .contact-wrapper .form-group {
+        margin-bottom: 10px;
+    }
+    .edit_profile hr,
+    .edit_profile br {
+        display: none;
+    }
+
+    div#buttonPanel {
+        display: none !important;
+    }
+    .right-column, .left-column{
+        padding: 10px;
+    }
+    span.countr-color,
+    .task_overview .user_name {
+        font-weight: normal;
+        font-size: 14px;
+    }
+    .user_info p{
+        margin-bottom:0px;  
+    }
+    .task_overview .user_info{
+        width: 31%;
+        float: left;
+    }
+    .task_overview .user_info > span.countr-color{
+        color: #444;
+    }
+    .dpImage-holder{
+        width: 80px;
+        height: 80px;
+        border-radius:4px;
+    }
+    #about-tasker .verification-iconsname{
+        width: 68%;
+        font-size: 14px;
+        background: #f5f5f5;
+        padding: 5px;
+        float: right;
+    }
+    .over-icons{
+        font-size: 18px;
+        margin: 0 6px;
+        margin-top: 0;
+    }
+    .tasker-profile .btn-secondary-edit{
+        margin-bottom: 0px;
+    }
+    .reviews-profile-nobg .h7 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+    .tasker-profile .task-details{
+        text-align: left !important;
+    }
+    .popup-task .modal-dialog {
+        margin: 10px !important;
+        margin-right: 0px !important;
+        margin-top: 50px !important;
+    }
+    .header_home section#cta.page-content{
+        display: none;
+    }
+    .recently_price,
+    #browse-tasks .task-right span{
+        float: right;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 10px;
+        background: #80BB35;
+        border-color: #80BB35;
+        color: #fff;
+        border-radius: 2px;
+        padding: 6px 12px;
+        margin-top: 2px;
+        width: 95px;
+        text-align: center;
+    }
+    .recently_actions .btn {
+        display: none;
+    }
+    .task-tasker.task-active {
+        background: #19a9e5;
+        border-color: #19a9e5;
+    }
+    .task-taskee.task-active {
+        background: #60ba25 ;
+        border-color: #60ba25 ;
+    }
+    .popup-task #myModal{
+        padding:0px !important;
+    }
+    .character_title, .character_detail, .budget_detail, .dateTime_detail, .map_detail{
+        text-align: right;
+    }
+    .taskid_date {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .flag-task-overview{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #browser-filter .form-control{
+        font-size: 14px;
+    }
+    .chat_text_area{
+        width: 100%;
+        float: left;
+    }
+    .submit_chat {
+        width: auto;
+        height: auto;
+    }
+    .private-message .chat-box form{
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        position: fixed;
+        left: 0;
+        bottom: -21px;
+        margin-bottom: 0;
+        background: #fff;
+    }
+    .private-message .tasker_chat form{
+        bottom: -27px;
+    }
+    .submit_chat input{
+        float: right;
+        position: fixed;
+        bottom: 4px;
+        right: 5px;
+    }
+    .private-message .chat-box .avatar-icon{
+        margin-left: 6px;
+    }
+    .private-message .tasker_chat .chat_textarea{
+        padding:0px;
+    }
+    /* task detail popup's */
+    .featherlight{
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 5px;
+    }
+    .featherlight .featherlight-content{
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    /* Taker Review */
+    #tasker_review_page .left-pull,
+    #tasker_review_page .right-pull,
+    .task-pr-details h6,
+    .task-pr-details form,
+    .cash_payment_main{
+        width: 100%;
+        text-align: center;
+    }
+    .cash_payment_main button{
+        float: none !important;
+    }
+    #task-page .task-pr-status {
+        display: block;
+        width: 96px;
+        margin: 5px auto;
+    }
+
+    /* taske detail popup */
+    .featherlight .task-overview-description h6 {
+        margin-bottom: 5px;
+    }
+    .featherlight .task-overview-description {
+        margin-top: 10px !important;
+        width: 100% !important;
+        text-align: center !important;
+        height: auto;
+    }
+    .task-overview-details .task{
+        width: 100% !important;
+        height: auto !important;
+    }
+    /* membership page */
+    #membership_main .holder > div{
+        width: 50%;
+        float: left;
+    }
+	/* browser taks search */
+	.search_task .no-pad-right{
+		padding:0px;
+	}
+	.search_task .search_states:before {
+		left: 6px;
+	}
+	.search_states{
+		padding:0 4px;
+	}
+	/* menu browse task button */
+	.mobile_browse_task{
+		display:block;
+	}
+    .mobile_browse_task a{
+        background: #fff;
+        color: #19a9e5 !important;
+        padding: 6px 12px;
+        display: block;
+        width: 110px;
+        font-size: 14px;
+        margin: 0 auto;
+    }
+    .menu-links.list-unstyled > li:nth-of-type(2) a{
+        width: 110px;
+    }
+    /* Nav Menu notification */
+    #bs-example-navbar-collapse-1{
+        background: transparent;
+        float: left;
+    }
+    #bs-example-navbar-collapse-1 > .navbar-left,
+    #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right > li:nth-last-of-type(-n+3){
+        display: none;
+    }
+    #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right > li{
+        display: inline-block;
+        margin: 0px 5px;
+    }
+    #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right {
+        margin: 0;
+        position: absolute;
+        top: 17px;
+        right: 63px;
+        overflow: visible;
+        padding: 0;
+    }
+    #bs-example-navbar-collapse-1 .nav.navbar-nav.navbar-right li.open > ul{
+        width: 100% !important;
+        left: 0;
+        top: 58px;
+        float: left;
+        right: initial;
+        position: fixed;
+        background: #fff;
+        border-radius: 0;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2) !important;
+        -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2) !important;
+    }
+    .nav.navbar-nav.navbar-right li.open > a:before{
+        top: 22px;
+    }
+    .msg-right-side .last-msg{
+    	font-size: 12px !important;
+    }
+    .msg-right-side {
+	    width: 87%;
+	}
+	
+	
+	
+}
+
+@media (max-width:600px) and (orientation:landscape) {
+    header#main {
+        height: 400px;
+    }
+}
+
+@media (max-width:600px) {
+  .picker--opened .picker__holder{
+    max-width: 250px;
+  }
+    .search_categories {
+      /*  display:none */
+    }
+
+    .search_states,
+    .search_input {
+        display: table;
+        width: 100%;
+        margin: 6px 0;
+    }
+
+    .search_button {
+        width:100%;
+        display: table;
+    }
+
+    .search_dropdown {
+        top:115px;
+    }
+
+    .states_list li {
+        width: 50%;
+        font-size: 12px;
+        padding: 4px 14px;
+    }
+
+    .category_text {
+        display:none
+    }
+
+    #site-menu {
+        width:300px;
+        right:-300px;
+    }
+
+    .show-nav #site-canvas {
+        -webkit-transform: translateX(-300px);
+        transform: translateX(-300px);
+
+        -webkit-transform: translate3d(-300px, 0, 0);
+        transform: translate3d(-300px, 0, 0);
+    }
+
+    .task-details {
+        width: 100%;
+        margin: 0;
+        text-align:center;
+    }
+
+    .task-left {
+        float:none;
+        display:table;
+        margin:0 auto 10px;
+    }
+
+    .regions li a {
+        width:100%;
+        border-right: 0;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    #task-page .nav-tabs>li>a {
+        font-size:12px;
+    }
+
+    .task-open, .task-closed,
+    .task-taskee, .task-tasker {
+        font-size:8px;
+    }
+
+    /* .breadcrumb>li {
+        font-size: 10px;
+    } */
+
+    .breadcrumb {
+        padding-top:0;
+        padding-bottom: 3px;
+    }
+
+    .sub-nav .task-pr-status {
+        margin-top:4px;
+    }
+    /* by hammad */
+    .post-main h1 {
+        font-size: 27px;
+    }
+    .post-main h4 {
+        font-size: 22px;
+    }
+}
+
+@media (min-width:481px) and (max-width:568px){
+   
+    #cta, #cta2 {
+        margin-top: 80px;
+    }
+    #site-menu {
+        right: -600px !important;
+    }
+    .private-message .messages {
+        width: 88% !important;
+    }
+}
+
+@media (max-width:480px){
+    .recently_block {
+        width: 100%;
+        position: relative;
+        margin:0px;
+        margin-bottom: 10px;
+    }
+    #cta, #cta2{
+        padding: 15px 0px;
+    }
+    #how {
+        margin-bottom: 50px;
+    }
+    #site-menu {
+        right: -600px !important;
+    }
+    #browse-tasks .task-details {
+        width: 49% !important;
+    }
+    #browse-tasks .task-details > a{
+        overflow: hidden;
+        height: 20px;
+        display: block;
+        font-size: 14px;
+    }
+    #cta .category_box{
+        width: 100% !important;
+    }
+    
+    
+    .private-message .messages {
+        width: 80% !important;
+    }
+    #employer_task{
+        padding: 0px;
+    }
+    #tasker_tasks{
+        padding:0 !important;
+    }
+    #overview-tasks .bids-details .column{
+        display: block;
+        width: 100%;
+        float: left;
+    }
+    #overview-tasks .bids-details .column span,
+    #overview-tasks .bids-details .column p{
+        width: 50%;
+        float: left;
+        margin:0px;
+        font-size: 14px !important;
+    }
+    .bids-details {
+        height: auto;
+    }
+    .breadcrumb>li{
+        font-size: 12px;
+    }
+    .transport-type > div {
+        width: 100%;
+        float: left;
+    }
+    .infowindow .top{
+        width: 100%;
+        float: left;
+        padding: 3px 10px;
+        background: #f7f7f7;
+    }
+
+    .featherlight .column {
+        display: block;
+        width: 100%;
+        float: left;
+    }
+    .featherlight  .bids-details {
+        background: #f1f1f1;
+        border: none;
+        color: #000;
+        padding-top: 5px;
+    }
+    .featherlight .column p{
+        display: inline-block;
+    }
+    .featherlight  span.bid-no{
+        margin-left: 15px;
+        display: inline-block;
+        font-size: 15px;
+    }
+    /* membership page */
+    #membership_main .holder > div{
+        width: 100%;
+        float: left;
+        border:none;
+    }
+    .msg-right-side {
+	    width: 82%;
+	}
+
+}
+
+@media (min-width:415px) and (max-width:480px){
+   
+    /* #cta ,#cta2{
+        margin-top: 180px;
+    } */
+    .recently_block {
+        width: 80%;
+        margin: 0px auto;
+        float: none;
+        margin-bottom: 20px;
+    }
+    .msg-right-side {
+	    width: 87%;
+	}
+
+}

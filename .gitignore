@@ -1,0 +1,6 @@
+/node_modules
+/bower_components
+/public
+/content/task_img/**
+/content/css/fonts
+/content/img/task_imgs/**

@@ -1,0 +1,245 @@
+<!-- Modal -->
+<!-- Modal content-->
+<div id="user_profile" class="user_profile">
+  <form class="form-horizontal" method="post" accept-charset="utf-8">
+    <div class="user_info">
+      <a><img ng-src="{{userInfo.user_image}}" alt="User Image" fallback-src></a>
+      
+      <span id="user_rating" class="col-md-12 no-padding" uib-rating ng-model="userInfo.rating" max="5" titles="ratingTitle"
+        read-only="true" on-leave="overStar = null" aria-labelledby="default-rating"></span>
+
+      <div class="col-md-12 no-padding payment_methods">
+        <h6>Payments</h6>
+        <span id="paypal_active"><i class="fa fa-paypal" ng-class="userInfo.paypal_active==1 && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Paypal
+            </md-tooltip></i></span>
+
+        <span id="stripe_active"><i class="fa fa-cc-stripe" ng-class="userInfo.stripe_active==1 && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Stripe
+            </md-tooltip></i></span>
+
+        <span id="cash_active"><i class="fa fa-usd" ng-class="userInfo.cash_active==1 && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Cash
+            </md-tooltip></i></span>
+      </div>
+
+      <div class="col-md-12 no-padding peace_of_mind">
+        <h6>Peace of Mind</h6>
+        <span id="paypal_active"><i class="fa fa-gavel" ng-class="piece_of_mind.criminal_record==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top" >
+              Criminal Record
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-balance-scale" ng-class="piece_of_mind.enhanced_criminal_record==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Enhanced Criminal Record
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-clone" ng-class="piece_of_mind.red_seal==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Red Seal
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-medkit" ng-class="piece_of_mind.first_aid==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Fist Aid
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-thumbs-up" ng-class="piece_of_mind.insurance==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Insurance
+            </md-tooltip></i></span>
+      </div>
+
+      <div class="col-md-12 no-padding peace_of_mind">
+        <h6>Modes of Transportation</h6>
+        <span id="paypal_active"><i class="fa fa-male over-icons">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Walk
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-motorcycle" ng-class="transportation.bicycle==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Bicycle
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-bus" ng-class="transportation.public==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Public
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-car" ng-class="transportation.car==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Car
+            </md-tooltip></i></span>
+        <span id="paypal_active"><i class="fa fa-truck" ng-class="transportation.truck==1 && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Truck
+            </md-tooltip></i></span>
+      </div>
+
+    </div>
+    <div class="user_detail">
+      <h3><a ng-click="viewProfile({id:userInfo.id})";>{{userInfo.name}}</a></h3>
+      <small>Last Active Time: <div am-time-ago="userInfo.last_active_time"></div></small>
+      <div ng-cloak>
+        <md-content>
+          <md-tabs md-dynamic-height md-border-bottom id="main_tabs">
+            
+            <md-tab label="About Me">
+              <md-content class="md-padding">
+                 {{userInfo.user_description || "No Information entered"}}
+              </md-content>
+            </md-tab>
+
+            <md-tab label="Skill Set">
+              <md-content class="md-padding">
+                <div class="col-md-12 no-padding skill_data">
+                  <h6>Skill Set</h6>
+                  <ul>
+                    <li ng-repeat="skill in skills" uib-popover-html="htmlPopover" popover-trigger="'mouseenter'" popover-placement="right">{{skill}}</li>
+                  </ul>
+                </div>
+
+                <div class="col-md-12 no-padding skill_data">
+                  <h6>Education</h6>
+                  <ul>
+                    <li ng-repeat="edu in education" uib-popover-html="htmlPopover" popover-trigger="'mouseenter'" popover-placement="right">{{edu}}</li>
+                  </ul>
+                </div>
+
+                <div class="col-md-12 no-padding skill_data">
+                  <h6>Certification</h6>
+                  <ul>
+                    <li ng-repeat="certifications in certifications">{{certifications}}</li>
+                  </ul>
+                </div>
+              </md-content>
+            </md-tab>
+
+            <md-tab label="Reviews">
+              <!--{{employer | json}}-->
+              <md-content class="md-padding">
+                <md-tabs md-dynamic-height md-border-bottom>
+                  <md-tab label="Employer">
+                    <md-content class="md-padding">
+                      <ul id="task_quiz_api">
+                        <li ng-repeat="row in employer" ng-click="viewReviews(row.user_id)">
+                          <div class="image_holder" >
+                            <img id="quiz_user_image_api" src="{{row.user_image}}" alt="No Image" fallback-src>
+                            <p>{{row.name}}</p>
+                          </div>
+                          <div class="name_timestamp">
+                            <div class="user_name pull-left">
+                              <a href="#" id="quiz_user_name_api" ng-click="viewTask(row.id)">{{row.task_title}}</a>
+                            </div>
+
+                            <div class="time_stamp pull-right" id="quiz_date_ago_api" am-time-ago="row.date"></div>
+                            <div id="user_rating" class="col-md-12 no-padding" uib-rating ng-model="row.points" max="5" titles="ratingTitle" read-only="true"
+                              on-leave="overStar = null" aria-labelledby="default-rating"></div>
+                            <hr>
+                            <div class="question">{{row.feedback || "No Feedback entered"}}</div>
+                          </div>
+                        </li>
+                      </ul>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Tasker">
+                    <md-content class="md-padding">
+                      <ul id="task_quiz_api">
+                        <li ng-repeat="row in tasker" ng-click="viewReviews(row.user_id)">
+                          <div class="image_holder">
+                            <img id="quiz_user_image_api" src="{{row.user_image}}" alt="No Image" fallback-src>
+                            <p>{{row.name}}</p>
+                          </div>
+                          <div class="name_timestamp">
+                            <div class="user_name pull-left">
+                              <a href="#" id="quiz_user_name_api" ng-click="viewTask(row.id)">{{row.task_title}}</a>
+                            </div>
+                            <div class="time_stamp pull-right" id="quiz_date_ago_api" am-time-ago="row.date"></div>
+                            <div id="user_rating" class="col-md-12 no-padding" uib-rating ng-model="row.points" max="5" titles="ratingTitle" read-only="true"
+                              on-leave="overStar = null" aria-labelledby="default-rating"></div>
+                            <hr>
+                            <div class="question">{{row.feedback || "No Feedback entered"}}</div>
+                          </div>
+                        </li>
+                      </ul>
+                    </md-content>
+                  </md-tab>
+                </md-tabs>
+
+              </md-content>
+            </md-tab>
+
+            <!-- <md-tab label="Current Tasks">
+              <md-content class="md-padding">
+
+              </md-content>
+            </md-tab> -->
+
+            <!-- <md-tab label="Gallery">
+              <md-content class="md-padding">
+                <md-tabs md-dynamic-height md-border-bottom>
+                  <md-tab label="Tasks">
+                    <md-content class="">
+                      <ul id="gallery_tasks">
+                        <li>
+                          <div class="img_holder">
+                            <img src="https://www.w3schools.com/css/img_lights.jpg" alt="" fallback-src>
+                          </div>
+
+                          <div class="task_data">
+                            <div class="task_title">
+                              Task Title <span class="pull-right">2 jan 2017</span>
+                            </div>
+                            <div class="user_info">
+                              <a><img alt="User Image" fallback-src="" src="/content/img/no-image.png"></a>
+                              <span id="task_rating_api" class="col-md-12 no-padding" uib-rating ng-model="$ctrl.rating" titles="ratingTitle" max="5" read-only="true"
+                                on-leave="overStar = null" aria-labelledby="default-rating"></span>
+                              <span class="task-author">
+                                <a class="user-fullname ng-binding">Hammad</a>
+                              </span>
+                            </div>
+                            <div class="comments">
+                              Employer Comments.
+                            </div>
+                          </div>
+                        </li>
+
+                        <li>
+                          <div class="img_holder">
+                            <img src="https://www.w3schools.com/css/img_lights.jpg" alt="" fallback-src>
+                          </div>
+
+                          <div class="task_data">
+                            <div class="task_title">
+                              Task Title <span class="pull-right">2 jan 2017</span>
+                            </div>
+                            <div class="user_info">
+                              <a><img alt="User Image" fallback-src="" src="/content/img/no-image.png"></a>
+                              <span id="task_rating_api" class="col-md-12 no-padding" uib-rating ng-model="$ctrl.rating" titles="ratingTitle" max="5" read-only="true"
+                                on-leave="overStar = null" aria-labelledby="default-rating"></span>
+                              <span class="task-author">
+                                <a class="user-fullname ng-binding">Hammad</a>
+                              </span>
+                            </div>
+                            <div class="comments">
+                              Employer Comments.
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </md-content>
+                  </md-tab>
+                  <md-tab label="Events">
+                    <md-content class="">
+
+                    </md-content>
+                  </md-tab>
+                </md-tabs>
+              </md-content>
+            </md-tab> -->
+
+          </md-tabs>
+        </md-content>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- end popup -->

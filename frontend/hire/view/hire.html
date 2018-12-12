@@ -1,0 +1,25 @@
+<div id="hire">
+  <form class="form-horizontal" method="post" accept-charset="utf-8">
+    <p>Contact user about your work opporunity.</p>
+
+    <h3>Hire Now</h3>
+    <textarea name="" id="" ng-model="hireData.message" rows="6" class="form-control"></textarea>
+    <p>Offer: </p>
+    <md-radio-group ng-model="hireData.rate" class="set_rate" ng-init="hireData.rate = 'fixed'">
+      <md-radio-button value="fixed"> Set Fixed Price </md-radio-button>
+    </md-radio-button>
+    <input type="number" name="task_budget" ng-model="hireData.task_budget" ng-min="10" ng-max="1000" class="form-control" id="task_budget"
+        ng-minlength="1" required ng-value="updateBidData.bid_amount" readonly ng-init="hireData.task_budget = updateBidData.bid_amount"/>
+
+    <md-checkbox ng-model="updateBidData.bid" aria-label="Checkbox 1" ng-checked="true">
+      Please send me bids from other freelancers if my task is not accepted.
+    </md-checkbox>
+    <input type="hidden" name="task_id" ng-value="updateBidData.task_id" ng-model="hireData.task_id" ng-init="hireData.task_id = updateBidData.task_id">
+    <input type="hidden" name="awarded_by" ng-value="userData.id" ng-model="hireData.awarded_by" ng-init="hireData.awarded_by = userData.id">
+    <input type="hidden" name="awarded_to" ng-value="updateBidData.user_id" ng-model="hireData.awarded_to" ng-init="hireData.awarded_to = updateBidData.user_id">
+    <input type="hidden" name="awarded_name" ng-value="updateBidData.name" ng-model="hireData.awarded_name" ng-init="hireData.awarded_name = updateBidData.name">
+
+    <md-button class="md-raised md-primary" id="hire_now" ng-click="hire_user(hireData)">Hire {{updateBidData.name}}</md-button>
+    <p>By clicking the button, you have read and agree to our <a ui-sref="page.terms">Terms & Conditions</a> and <a ui-sref="page.policy">Privacy Policy</a>.</p>
+  </form>
+</div>

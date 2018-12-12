@@ -1,0 +1,330 @@
+<div class="container" id="editProfile">
+  <form novalidate name="profile" autocomplete="off">
+    <div layout="row">
+      <h1>Edit Profile</h1>
+    </div>
+
+    <div class="col-md-3 text-center">
+      <div layout-wrap layout="column">
+        <h4>Upload Profile Picture</h4>
+      </div>
+      <div id="profile_image">
+        <img src="{{form.user.user_image}}" ng-src="{{form.user.user_image}}" fallback-src>
+      </div>
+      <div id="profile_image_edit">
+        <input type="file" ngf-drop ngf-select ng-model="imageUrl" on-file-change="upload" id="profile-file" name="task_img" class=""
+          ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-allow-dir="true" accept="image/*" ngf-pattern="'image/*'"
+          ngf-max-size="20MB" />
+      </div>
+      <div id="save-profile-btn" class="form-group text-center" ng-if="imageUrl">
+        <md-button class="md-raised md-primary" ng-click="savePhoto()">Save Profile Photo</md-button>
+        <md-button class="md-raised md-primary" ng-click="cancelPhoto()">Cancel</md-button>
+      </div>
+      <div class="user_info text-center">
+        <div class="col-md-12 no-padding payment_methods">
+          <h4>Payments</h4>
+          <span id="paypal_active"><i class="fa fa-paypal" ng-class="form.user.paypal_active && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Paypal
+            </md-tooltip></i></span>
+
+          <span id="stripe_active"><i class="fa fa-cc-stripe" ng-class="form.user.stripe_active==1 && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Stripe
+            </md-tooltip></i></span>
+
+          <span id="cash_active"><i class="fa fa-usd" ng-class="form.user.cash_active==1 && 'over-icons'">
+                <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Cash
+            </md-tooltip></i></span>
+        </div>
+
+        <div class="col-md-12 no-padding peace_of_mind">
+          <h4>Peace of Mind</h4>
+          <span id="paypal_active"><i class="fa fa-gavel" ng-class="form.user.cr && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Criminal Record
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-balance-scale " ng-class="form.user.ecm && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Enhanced Criminal Record
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-clone " ng-class="form.user.red_seal && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Red Seal
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-medkit " ng-class="form.user.first_aid && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Fist Aid
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-thumbs-up " ng-class="form.user.insurance && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Insurance
+            </md-tooltip></i></span>
+        </div>
+
+        <div class="col-md-12 no-padding peace_of_mind">
+          <h4>Modes of Transportation</h4>
+          <!--<span id="paypal_active"><i class="fa fa-male ">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top" ng-class="form.user.walk && 'over-icons'">
+              Walk
+            </md-tooltip></i></span>-->
+          <span id="paypal_active"><i class="fa fa-motorcycle " ng-class="form.user.bicycle && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Bicycle
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-bus " ng-class="form.user.public && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Public
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-car " ng-class="form.user.car && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Car
+            </md-tooltip></i></span>
+          <span id="paypal_active"><i class="fa fa-truck " ng-class="form.user.truck && 'over-icons'">
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+              Truck
+            </md-tooltip></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div layout="row">
+        <md-input-container flex="33">
+          <label>First Name</label>
+          <input required name="name" ng-model="form.user.name">
+          <div ng-messages="profile.name.$invalid">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="33">
+          <label>Last Name</label>
+          <input required name="lname" ng-model="form.user.lname">
+          <div ng-messages="profile.lname.$invalid">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="33">
+          <label>Email</label>
+          <input name="email" ng-model="form.user.email" required maxlength="100" ng-pattern="/^.+@.+\..+$/" disabled/>
+          <div ng-messages="profile.email.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <!--<md-input-container flex="50">
+          <label>Project Type</label>
+          <md-select name="type" ng-model="project.type" required>
+            <md-option value="app">Application</md-option>
+            <md-option value="web">Website</md-option>
+          </md-select>
+        </md-input-container>-->
+      </div>
+      <div layout="row">
+          <md-input-container flex="100">
+          <label>Description</label>
+          <textarea  md-maxlength="500" id="description" required md-no-asterisk name="user_description" ng-model="form.user.user_description"></textarea>
+          <div ng-messages="profile.user_description.$error" role="alert">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="maxlength">The description must be less than 500 characters long.</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div layout="row">
+        <md-input-container flex="33">
+          <label>Telephone</label>
+          <input name="telephone" ng-model="form.user.telephone" ng-pattern="/^[0-9]*$/"/>
+          <div ng-messages="profile.telephone.$error">
+            <div ng-message="pattern">Please enter a valid phone number.</div>
+          </div>
+
+        </md-input-container>
+
+        <md-input-container flex="33">
+          <label>Street Address <i class="fa fa-exclamation-circle" aria-hidden="true"> 
+            <md-tooltip md-delay="10" md-direction="top">
+                Not visible publicly
+            </md-tooltip>
+        </i></label>
+          <input ng-model="form.user.streetaddress" name="streetaddress" ng-change="update()" autocomplete="false" g-places-autocomplete
+            options="autocompleteOptions" force-selection="true" required/>
+          <div ng-messages="profile.streetaddress.$error" role="alert">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container flex="33">
+          <label>City</label>
+          <input ng-model="form.user.location" name="location" force-selection="true" disabled required/>
+          <div ng-messages="profile.location.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout-wrap layout="row">
+        <h4 flex="100">How do you prefer to pay and be paid?</h4>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.paypal_active" ng-checked="form.user.paypal_active == 1" ng-true-value="1" aria-label="Paypal">
+            Paypal
+          </md-checkbox>
+          <md-input-container ng-show="form.user.paypal_active == 1" Fmessage>
+            <label>Email</label>
+            <input ng-model="form.user.paypal_email" type="email" required>
+          </md-input-container>
+        </div>
+        <div flex="100">
+          <md-checkbox ng-model="form.user.stripe_active" ng-checked="form.user.stripe_active == 1" ng-true-value="1" aria-label="Stripe">
+            Stripe
+          </md-checkbox>
+        </div>
+        <div flex="100">
+          <md-checkbox ng-model="form.user.cash_active" ng-checked="form.user.cash_active == 1" ng-true-value="1" aria-label="Cash">
+            Cash
+          </md-checkbox>
+        </div>
+      </div>
+
+      <div layout-wrap layout="row">
+        <h4 flex="100">What is your Peace of Mind?</h4>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.cr" ng-checked="form.peace_of_mind.criminal_record == 1" ng-true-value="1" aria-label="Criminal Record">
+            Criminal Record
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.ecm" ng-checked="form.peace_of_mind.enhanced_criminal_record == 1" ng-true-value="1" aria-label="Enhanced Criminal Record">
+            Enhanced Criminal Record
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.red_seal" ng-checked="form.peace_of_mind.red_seal == 1" ng-true-value="1" aria-label="Red Seal">
+            Red Seal
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.first_aid" ng-checked="form.peace_of_mind.first_aid == 1" ng-true-value="1" aria-label="First Aid">
+            First Aid
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.insurance" ng-checked="form.peace_of_mind.insurance == 1" ng-true-value="1" aria-label="Insurance">
+            Insurance
+          </md-checkbox>
+        </div>
+      </div>
+
+      <div layout-wrap layout="row">
+        <h4 flex="100">What modes of transportation do you have?</h4>
+
+        <div flex="25">
+          <md-checkbox ng-model="form.user.bicycle" ng-checked="form.transportation.bicycle == 1" ng-true-value="1" aria-label="Bicycle">
+            Bicycle
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.public" ng-checked="form.transportation.public == 1" ng-true-value="1" aria-label="Public">
+            Public
+          </md-checkbox>
+        </div>
+        <div flex="25">
+          <md-checkbox ng-model="form.user.car" ng-checked="form.transportation.car == 1" ng-true-value="1" aria-label="By Car">
+            Car
+          </md-checkbox>
+        </div>
+
+        <div flex="25">
+          <md-checkbox ng-model="form.user.truck" ng-checked="form.transportation.truck == 1" ng-true-value="1" aria-label="Truck">
+            Truck
+          </md-checkbox>
+        </div>
+      </div>
+      <div layout-wrap layout="row">
+        <h4 flex="100" class="md-title">Skill Set
+          <i class="fa fa-exclamation-circle" aria-hidden="true"> 
+                <md-tooltip md-delay="10" md-direction="top">
+                    Type Tag and Press Enter to insert a new tag
+                </md-tooltip>
+            </i>
+        </h4>
+        <md-chips flex="100" ng-model="form.skills" md-autocomplete-snap md-require-match md-highlight-flags="i" filter-selected="true" md-max-chips="30"
+          readonly="false" md-removable="true" md-enable-chip-edit="true" md-transform-chip="newTag($chip)" ng-keyup="$event.keyCode == 13 ? edit_user(form) : return">
+          <md-chip-template>
+            <strong>{{$chip.tag}}</strong>
+          </md-chip-template>
+          <md-autocomplete md-selected-item="skill" md-search-text="searchText" md-items="item in getMatchesForSkills(searchText)"
+            md-item-text="item.tag" placeholder="Search Skills" md-no-cache="true">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.tag}}</span>
+            </md-item-template>
+            <md-not-found>
+              Add a new Tag...
+            </md-not-found>
+          </md-autocomplete>
+        </md-chips>
+
+      </div>
+
+      <div layout-wrap layout="row">
+        <h4 flex="100" class="md-title">Education/Certification
+          <i class="fa fa-exclamation-circle" aria-hidden="true"> 
+                <md-tooltip md-delay="10" md-direction="top">
+                    Type Tag and Press Enter to insert a new tag
+                </md-tooltip>
+            </i>
+        </h4>
+        <md-content layout="row">
+        <md-chips flex="100" ng-model="form.education" md-autocomplete-snap md-require-match md-highlight-flags="i" filter-selected="true" md-max-chips="30"
+          readonly="false" md-removable="true" md-enable-chip-edit="true" md-transform-chip="newTag($chip)" ng-keyup="$event.keyCode == 13 ? edit_user(form) : return">
+          <md-chip-template>
+            <strong>{{$chip.tag}}</strong>
+          </md-chip-template>
+          <md-autocomplete md-selected-item="edu" md-search-text="searchText" md-items="item in getMatchesForEdu(searchText)" md-item-text="item.tag"
+            placeholder="Search Education/Certification" md-no-cache="true">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.tag}}</span>
+            </md-item-template>
+            <md-not-found>
+              Add a new Tag...
+            </md-not-found>
+          </md-autocomplete>
+        </md-chips>
+      </md-content>
+      </div>
+      <!-- Certifications should be equipment now in frontend, backend and DB -->
+      <div layout-wrap layout="row">
+        <h4 flex="100" class="md-title">Equipment
+          <i class="fa fa-exclamation-circle" aria-hidden="true"> 
+                <md-tooltip md-delay="10" md-direction="top">
+                    Type Tag and Press Enter to insert a new tag
+                </md-tooltip>
+            </i>
+        </h4>
+        <md-chips flex="100" ng-model="form.certifications" md-autocomplete-snap md-require-match md-highlight-flags="i" filter-selected="true"
+          md-max-chips="30" readonly="false" md-removable="true" md-enable-chip-edit="true" md-transform-chip="newTag($chip)" ng-keyup="$event.keyCode == 13 ? edit_user(form) : return">
+          <md-chip-template>
+            <strong>{{$chip.tag}}</strong>
+          </md-chip-template>
+          <md-autocomplete md-selected-item="edu" md-search-text="searchText" md-items="item in getMatchesForCert(searchText)" md-item-text="item.tag"
+            placeholder="Search Equipment" md-no-cache="true">
+            <md-item-template>
+              <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.tag}}</span>
+            </md-item-template>
+            <md-not-found>
+              Add a new Tag...
+            </md-not-found>
+          </md-autocomplete>
+        </md-chips>
+      </div>
+
+
+      <div layout-wrap layout="row">
+        <md-button class="md-raised md-primary save-profile-btn" ng-click="edit_user(form)">Save Profile
+          <md-tooltip md-z-index="9999" md-delay="10" md-direction= "top">
+           Click here to save profile
+          </md-tooltip>
+        </md-button>
+      </div>
+    </div>
+  </form>
+</div>

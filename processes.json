@@ -1,0 +1,17 @@
+{
+    "apps": [
+        {
+            "name": "taskoli",
+            "script": ".",
+            "merge_logs": true,
+            "max_restarts": 20,
+            "instances" : "max",
+            "exec_mode" : "cluster_mode",
+            "max_memory_restart": "200M",
+            "env": {
+                "PORT": 8000,
+                "NODE_ENV": "prod"
+            }
+        }
+    ]
+}

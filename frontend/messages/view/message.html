@@ -1,0 +1,38 @@
+<div ng-if="chat_conversation" class="col-md-9 no-padding" id="chat-main-body">
+      <div class="chat-nav-header">
+        <div class="chat-name">
+            <span>{{task_info.task_title}}<span class="user-time-data"> {{task_info.start_date | date:'dd, MMM, yyyy h:mm a' }}</span></span>
+        </div>
+      </div>
+      <div class="room-chat-area-content">
+        <ul class="story-body" id="story-body">
+          <li ng-repeat="chat in chat_conversation" ng-class="chat.from_id == user_id ? 'me' : ''">
+            <div class="cover-img">
+              <img src="{{chat.user_image}}" alt="" fallback-src>
+            </div>
+            <h4 class="chat-author">{{chat.name}}</h4>
+            <span class="timestamp">{{chat.chat_time | date:'dd/MM/yyyy hh:mm a'}}</span>
+            <h4 class="story-message-text"> {{chat.message}}</h4>
+          </li>
+        </ul>
+        <div class="composer-panel">
+            <div class="is-typing">
+                <small ng-if="typing">{{chat_conversation[0].name}} is Typing...</small>
+            </div>
+          <span class="msg-composer-section">
+            <input type="text" ng-model="msg.message" class="form-control" required>
+            <input type="hidden" ng-model="msg.task_id" ng-init="msg.task_id = chat_conversation ? chat_conversation[0].task_id : userData.sendUserID || -1">
+            <input type="hidden" ng-model="msg.from_id" ng-init="msg.from_id = user_id">
+            <input type="hidden" ng-model="msg.to_id" ng-init="msg.to_id = chat_conversation ? chat_conversation[0].awarded_to == user_id ? chat_conversation[0].awarded_by : chat_conversation[0].awarded_to : -1">
+          </span>
+          <span class="msg-send-section">
+            <md-button class="md-raised md-primary send" ng-click="message(msg)">Send</md-button>
+          </span>
+        </div>
+      </div>
+</div>
+<div ng-if="!chat_conversation.length" class="col-md-9 no-padding" id="chat-main-body">
+    <div class="no-data-found">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> No Chat Selected
+    </div>
+  </div>
